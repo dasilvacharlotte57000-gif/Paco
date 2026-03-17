@@ -29,9 +29,11 @@
             font-family: "Trebuchet MS", "Segoe UI", sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top left, rgba(249, 115, 22, 0.22), transparent 28%),
-                radial-gradient(circle at top right, rgba(56, 189, 248, 0.2), transparent 30%),
-                linear-gradient(145deg, #020617 0%, #0f172a 45%, #111827 100%);
+                radial-gradient(circle at 12% 14%, rgba(34, 211, 238, 0.36), transparent 26%),
+                radial-gradient(circle at 88% 16%, rgba(45, 212, 191, 0.33), transparent 28%),
+                radial-gradient(circle at 78% 82%, rgba(6, 182, 212, 0.28), transparent 28%),
+                linear-gradient(140deg, #0b2430 0%, #105f6a 50%, #1f9aa7 100%);
+            background-attachment: fixed;
         }
 
         a {
@@ -105,6 +107,217 @@
         .nav a:hover {
             color: var(--text);
         }
+
+        #home.page {
+            width: min(1420px, calc(100% - 20px));
+            padding-top: 16px;
+        }
+
+        .home-shell {
+            position: relative;
+            border-radius: 26px;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: linear-gradient(140deg, rgba(116, 255, 235, 0.28), rgba(45, 212, 191, 0.2));
+            box-shadow: 0 20px 60px rgba(2, 24, 39, 0.3);
+            overflow: hidden;
+        }
+
+        .home-shell::before,
+        .home-shell::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .home-shell::before {
+            right: -80px;
+            top: -90px;
+            width: 230px;
+            height: 230px;
+            background: rgba(236, 253, 245, 0.34);
+        }
+
+        .home-shell::after {
+            left: -50px;
+            bottom: -70px;
+            width: 180px;
+            height: 180px;
+            background: rgba(103, 232, 249, 0.28);
+        }
+
+        .lobby-layout {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 138px 1fr;
+            gap: 12px;
+        }
+
+        .dock {
+            display: grid;
+            grid-template-rows: auto auto 1fr;
+            gap: 12px;
+        }
+
+        .dock-logo,
+        .dock-tile,
+        .dock-btn {
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            background: linear-gradient(160deg, #f0fdfa, #99f6e4);
+            color: #083344;
+            box-shadow: 0 12px 24px rgba(5, 46, 58, 0.18);
+        }
+
+        .dock-logo {
+            padding: 16px 10px;
+            text-align: center;
+            font-family: "Arial Black", "Trebuchet MS", sans-serif;
+            font-size: 2rem;
+            line-height: 1;
+            letter-spacing: 0.02em;
+        }
+
+        .dock-logo small {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+        }
+
+        .dock-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .dock-btn {
+            display: grid;
+            place-items: center;
+            height: 62px;
+            font-size: 1.35rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .dock-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.04);
+        }
+
+        .dock-tile {
+            position: relative;
+            overflow: hidden;
+            min-height: 182px;
+            padding: 12px;
+            display: grid;
+            align-content: end;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background:
+                linear-gradient(150deg, rgba(17, 24, 39, 0.06), transparent 50%),
+                linear-gradient(155deg, #22d3ee 0%, #4ade80 100%);
+            color: #ecfeff;
+        }
+
+        .dock-tile::before {
+            content: "🥷";
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: rgba(8, 47, 73, 0.36);
+            font-size: 1.35rem;
+        }
+
+        .home-grid {
+            display: grid;
+            gap: 12px;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-auto-rows: 90px;
+        }
+
+        .tile {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.22);
+            border-radius: 22px;
+            padding: 14px;
+            color: #ffffff;
+            box-shadow: 0 14px 28px rgba(6, 27, 39, 0.24);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 30px rgba(6, 27, 39, 0.32);
+            filter: saturate(1.06);
+        }
+
+        .tile::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.2), transparent 50%);
+            pointer-events: none;
+        }
+
+        .tile h3 {
+            position: relative;
+            z-index: 1;
+            font-size: 1.15rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .tile p {
+            position: relative;
+            z-index: 1;
+            margin-top: 6px;
+            font-size: 0.86rem;
+            color: rgba(255, 255, 255, 0.92);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+        }
+
+        .tile-icon {
+            position: absolute;
+            right: 12px;
+            top: 10px;
+            z-index: 1;
+            font-size: 1.8rem;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
+        }
+
+        .w2 { grid-column: span 2; }
+        .w3 { grid-column: span 3; }
+        .w4 { grid-column: span 4; }
+        .w5 { grid-column: span 5; }
+        .h1 { grid-row: span 1; }
+        .h2 { grid-row: span 2; }
+        .h3 { grid-row: span 3; }
+
+        .t-blackjack { background: linear-gradient(145deg, #f59e0b, #ea580c); }
+        .t-flappy { background: linear-gradient(145deg, #22d3ee, #0ea5e9); }
+        .t-salon { background: linear-gradient(145deg, #fb7185, #db2777); }
+        .t-snake { background: linear-gradient(145deg, #4ade80, #16a34a); }
+        .t-pong { background: linear-gradient(145deg, #facc15, #f97316); }
+        .t-morpion { background: linear-gradient(145deg, #a78bfa, #6366f1); }
+        .t-arcade { background: linear-gradient(145deg, #0ea5e9, #14b8a6); }
+        .t-race { background: linear-gradient(145deg, #f97316, #ef4444); }
+        .t-runner { background: linear-gradient(145deg, #84cc16, #16a34a); }
+        .t-plane { background: linear-gradient(145deg, #38bdf8, #6366f1); }
+        .t-brawl { background: linear-gradient(145deg, #ef4444, #f43f5e); }
+        .t-stack { background: linear-gradient(145deg, #22d3ee, #8b5cf6); }
 
         .hero {
             display: grid;
@@ -1176,6 +1389,37 @@
         }
 
         @media (max-width: 980px) {
+            #home.page {
+                width: min(100% - 12px, 1420px);
+            }
+
+            .lobby-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .dock {
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: auto;
+                align-items: stretch;
+            }
+
+            .home-grid {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                grid-auto-rows: 84px;
+            }
+
+            .w5,
+            .w4,
+            .w3,
+            .w2 {
+                grid-column: span 3;
+            }
+
+            .h3,
+            .h2 {
+                grid-row: span 2;
+            }
+
             .hero,
             .games-grid,
             .playable-section,
@@ -1192,6 +1436,34 @@
             .page {
                 width: min(100% - 20px, 1180px);
                 padding-top: 14px;
+            }
+
+            #home.page {
+                width: min(100% - 10px, 1420px);
+            }
+
+            .dock {
+                grid-template-columns: 1fr;
+            }
+
+            .dock-actions {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .dock-tile {
+                min-height: 110px;
+            }
+
+            .home-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 105px;
+            }
+
+            .w5,
+            .w4,
+            .w3,
+            .w2 {
+                grid-column: span 2;
             }
 
             .topbar,
@@ -1228,203 +1500,95 @@
 </head>
 <body>
     <div class="page" id="home">
-        <header class="topbar">
-            <div class="brand">
-                <div class="brand-badge">P</div>
-                <div>
-                    <h1>Paco Arcade</h1>
-                    <p>Des mini-jeux rapides, fun et faciles a lancer</p>
-                </div>
-            </div>
-            <nav class="nav" aria-label="Navigation principale">
-                <a href="#" onclick="navigateTo('/')">Accueil</a>
-                <a href="#jeux">Jeux</a>
-                <a href="#top">Decouvrir</a>
-            </nav>
-        </header>
-
-        <main>
-            <section class="hero" id="top">
-                <div class="hero-panel">
-                    <div class="eyebrow">Paco Arcade • Mini jeux instantanes</div>
-                    <h2>Choisis un jeu et lance ta partie en un clic</h2>
-                    <p class="subtitle">
-                        Une home plus simple, propre et rapide: tu choisis ton jeu, tu ouvres la page,
-                        et tu joues tout de suite. Flappy et Salon sont deja jouables.
-                    </p>
-                    <div class="hero-actions">
-                        <a class="button button-primary" href="#jeux">Voir les jeux</a>
-                        <a class="button button-secondary" href="/" onclick="navigateTo('/flappy'); return false;">Jouer a Flappy</a>
+        <main class="home-shell" aria-label="Portail principal Paco Arcade">
+            <section class="lobby-layout">
+                <aside class="dock" aria-label="Raccourcis">
+                    <div class="dock-logo">paco<small>ARCADE</small></div>
+                    <div class="dock-actions">
+                        <button class="dock-btn" type="button" onclick="navigateTo('/')" aria-label="Accueil">🏠</button>
+                        <button class="dock-btn" type="button" onclick="navigateTo('/flappy')" aria-label="Flappy">🐦</button>
+                        <button class="dock-btn" type="button" onclick="navigateTo('/blackjack')" aria-label="Blackjack">🃏</button>
+                        <button class="dock-btn" type="button" onclick="navigateTo('/salon')" aria-label="Salon">💈</button>
                     </div>
-                    <div class="hero-stats">
-                        <div>
-                            <strong>6</strong>
-                            <span>jeux mis en avant</span>
-                        </div>
-                        <div>
-                            <strong>100%</strong>
-                            <span>arcade rapide</span>
-                        </div>
-                        <div>
-                            <strong>24/7</strong>
-                            <span>pret a jouer</span>
-                        </div>
-                    </div>
-                </div>
-
-                <aside class="aside-panel" id="nouveaux">
-                    <div class="spotlight">
-                        <span class="spotlight-tag">Coup de coeur</span>
-                        <h3>Blackjack Flash</h3>
-                        <p class="subtitle">
-                            Un classique des cartes, facile a comprendre et parfait pour une partie courte.
-                        </p>
-                        <ul class="mini-list">
-                            <li><strong>Style</strong><span>Cartes / Strategie</span></li>
-                            <li><strong>Difficulte</strong><span>Simple</span></li>
-                            <li><strong>Temps moyen</strong><span>2 a 5 min</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="spotlight">
-                        <span class="spotlight-tag">Nouveau</span>
-                        <h3>Flappy Rush</h3>
-                        <p class="subtitle">
-                            Un jeu reflexe ultra simple a lancer avec une vraie vibe arcade.
-                        </p>
+                    <div class="dock-tile">
+                        Clique sur une tuile pour lancer un jeu instantanement.
                     </div>
                 </aside>
-            </section>
 
-            <section id="jeux">
-                <div class="section-head">
-                    <div>
-                        <h3>Jeux proposes</h3>
-                        <p class="subtitle">Une selection de jeux simples, rapides et populaires.</p>
-                    </div>
-                </div>
-
-                <div class="games-grid">
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon orange"><span>🃏</span></div>
-                                <span class="pill">Cartes</span>
-                            </div>
-                            <h4>Blackjack</h4>
-                            <p>Atteins 21 sans le depasser. Un classique accessible, rapide et tendu.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>Simple</span>
-                                <span>Strategie</span>
-                                <span>Solo</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/blackjack'); return false;">Jouer ici</a>
-                        </div>
+                <div class="home-grid" aria-label="Grille des jeux">
+                    <article class="tile t-stack w4 h3">
+                        <span class="tile-icon">🧱</span>
+                        <h3>Stack Tower</h3>
+                        <p>Collection arcade style portail</p>
                     </article>
 
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon blue"><span>🐦</span></div>
-                                <span class="pill">Arcade</span>
-                            </div>
-                            <h4>Flappy Bird</h4>
-                            <p>Une commande, des obstacles, et un score qui grimpe vite si tes reflexes suivent.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>Reflexe</span>
-                                <span>Rapide</span>
-                                <span>Score</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/flappy'); return false;">Jouer ici</a>
-                        </div>
+                    <article class="tile t-brawl w3 h2">
+                        <span class="tile-icon">🥊</span>
+                        <h3>Mini Battles</h3>
+                        <p>Multi-defis rapides</p>
                     </article>
 
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon green"><span>🐍</span></div>
-                                <span class="pill">Retro</span>
-                            </div>
-                            <h4>Snake</h4>
-                            <p>Mange, grandis et evite les collisions dans un grand classique du jeu mobile.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>Retro</span>
-                                <span>Progressif</span>
-                                <span>Solo</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/snake'); return false;">Jouer ici</a>
-                        </div>
+                    <article class="tile t-race w3 h2">
+                        <span class="tile-icon">🚗</span>
+                        <h3>Speed Crash</h3>
+                        <p>Course arcade explosive</p>
                     </article>
 
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon gold"><span>🏓</span></div>
-                                <span class="pill">Duel</span>
-                            </div>
-                            <h4>Pong</h4>
-                            <p>Le duel arcade par excellence, avec des parties courtes et tres nerveuses.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>2 joueurs</span>
-                                <span>Arcade</span>
-                                <span>Classique</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/pong'); return false;">Jouer ici</a>
-                        </div>
+                    <article class="tile t-plane w2 h2">
+                        <span class="tile-icon">✈️</span>
+                        <h3>Sky Loop</h3>
+                        <p>Vol reflexe</p>
                     </article>
 
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon red"><span>❌</span></div>
-                                <span class="pill">Logique</span>
-                            </div>
-                            <h4>Morpion</h4>
-                            <p>Simple a comprendre, ideal pour jouer vite contre un ami ou une IA basique.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>Tactique</span>
-                                <span>Court</span>
-                                <span>Accessible</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/morpion'); return false;">Jouer ici</a>
-                        </div>
+                    <article class="tile t-blackjack w3 h2" onclick="navigateTo('/blackjack')">
+                        <span class="tile-icon">🃏</span>
+                        <h3>Blackjack</h3>
+                        <p>Table, mise et croupier</p>
                     </article>
 
-                    <article class="game-card">
-                        <div>
-                            <div class="game-top">
-                                <div class="icon pink"><span>💇</span></div>
-                                <span class="pill">Creation</span>
-                            </div>
-                            <h4>Salon Studio</h4>
-                            <p>Choisis femme ou homme, coupe, couleur, degrade et cree ton propre look de coiffeur.</p>
-                        </div>
-                        <div>
-                            <div class="game-meta">
-                                <span>Coiffure</span>
-                                <span>Coloration</span>
-                                <span>Custom</span>
-                            </div>
-                            <a class="game-link" href="/" onclick="navigateTo('/salon'); return false;">Jouer ici</a>
-                        </div>
+                    <article class="tile t-flappy w3 h2" onclick="navigateTo('/flappy')">
+                        <span class="tile-icon">🐦</span>
+                        <h3>Flappy Rush</h3>
+                        <p>Passe les tuyaux et score</p>
+                    </article>
+
+                    <article class="tile t-salon w4 h2" onclick="navigateTo('/salon')">
+                        <span class="tile-icon">💇</span>
+                        <h3>Salon Studio</h3>
+                        <p>Mode Barber Chop jouable</p>
+                    </article>
+
+                    <article class="tile t-arcade w2 h1">
+                        <span class="tile-icon">🎯</span>
+                        <h3>Daily Hits</h3>
+                    </article>
+
+                    <article class="tile t-snake w2 h2" onclick="navigateTo('/snake')">
+                        <span class="tile-icon">🐍</span>
+                        <h3>Snake</h3>
+                        <p>Grandis sans collision</p>
+                    </article>
+
+                    <article class="tile t-morpion w2 h2" onclick="navigateTo('/morpion')">
+                        <span class="tile-icon">❌</span>
+                        <h3>Morpion</h3>
+                        <p>IA strategique minimax</p>
+                    </article>
+
+                    <article class="tile t-pong w3 h2" onclick="navigateTo('/pong')">
+                        <span class="tile-icon">🏓</span>
+                        <h3>Pong</h3>
+                        <p>Duel ultra nerveux</p>
+                    </article>
+
+                    <article class="tile t-runner w3 h2">
+                        <span class="tile-icon">🏃</span>
+                        <h3>Street Runner</h3>
+                        <p>Theme arcade moderne</p>
                     </article>
                 </div>
             </section>
         </main>
-
-        <footer>
-            <p>Paco Arcade • Une selection de mini-jeux simples comme Blackjack, Flappy Bird, Salon Studio et bien plus.</p>
-        </footer>
     </div>
 
     <div class="page hidden" id="flappy-page">
