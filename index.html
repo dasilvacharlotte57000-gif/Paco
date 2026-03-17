@@ -939,6 +939,34 @@
             text-align: center;
         }
 
+        .page.hidden {
+            display: none;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(-3px);
+        }
+
+        .back-button::before {
+            content: "←";
+            font-weight: 700;
+        }
+
         @media (max-width: 980px) {
             .hero,
             .games-grid,
@@ -990,7 +1018,7 @@
     </style>
 </head>
 <body>
-    <div class="page">
+    <div class="page" id="home">
         <header class="topbar">
             <div class="brand">
                 <div class="brand-badge">P</div>
@@ -1000,10 +1028,10 @@
                 </div>
             </div>
             <nav class="nav" aria-label="Navigation principale">
+                <a href="#" onclick="navigateTo('/')">Accueil</a>
                 <a href="#jeux">Jeux</a>
                 <a href="#top">Top picks</a>
                 <a href="#nouveaux">Nouveautes</a>
-                <a href="#salon">Salon</a>
             </nav>
         </header>
 
@@ -1103,7 +1131,7 @@
                                 <span>Rapide</span>
                                 <span>Score</span>
                             </div>
-                            <a class="game-link" href="#jouer">Jouer ici</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/flappy'); return false;">Jouer ici</a>
                         </div>
                     </article>
 
@@ -1179,13 +1207,34 @@
                                 <span>Coloration</span>
                                 <span>Custom</span>
                             </div>
-                            <a class="game-link" href="#salon">Jouer ici</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/salon'); return false;">Jouer ici</a>
                         </div>
                     </article>
                 </div>
             </section>
+        </main>
 
-            <section class="playable-section" id="jouer">
+        <footer>
+            <p>Paco Arcade • Une selection de mini-jeux simples comme Blackjack, Flappy Bird, Salon Studio et bien plus.</p>
+        </footer>
+    </div>
+
+    <div class="page hidden" id="flappy-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">F</div>
+                <div>
+                    <h1>Flappy Rush</h1>
+                    <p>Un arcade reflexe a decouvrir</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="playable-section">
                 <div class="playable-panel">
                     <div class="playable-header">
                         <div>
@@ -1233,8 +1282,29 @@
                     </ul>
                 </aside>
             </section>
+        </main>
 
-            <section class="salon-section" id="salon">
+        <footer>
+            <p>Paco Arcade • Flappy Rush - reflexe et arcade en ligne</p>
+        </footer>
+    </div>
+
+    <div class="page hidden" id="salon-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">C</div>
+                <div>
+                    <h1>Salon Studio</h1>
+                    <p>Coiffure et couleurs a volonte</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="salon-section">
                 <div class="salon-stage">
                     <div class="playable-header">
                         <div>
@@ -1341,10 +1411,32 @@
         </main>
 
         <footer>
-            <p>Paco Arcade • Une selection de mini-jeux simples comme Blackjack, Flappy Bird, Salon Studio et bien plus.</p>
+            <p>Paco Arcade • Salon Studio - coiffure au complet</p>
         </footer>
     </div>
     <script>
+        // ==================== ROUTING SYSTEM ====================
+        function navigateTo(path) {
+            const pages = document.querySelectorAll(".page");
+            pages.forEach(page => page.classList.add("hidden"));
+
+            if (path === "/") {
+                document.getElementById("home").classList.remove("hidden");
+            } else if (path === "/flappy") {
+                document.getElementById("flappy-page").classList.remove("hidden");
+            } else if (path === "/salon") {
+                document.getElementById("salon-page").classList.remove("hidden");
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize router on page load
+        window.addEventListener("load", () => {
+            navigateTo("/");
+        });
+
+        // ==================== GAME LOGIC ====================
         const canvas = document.getElementById("flappy-canvas");
         const context = canvas.getContext("2d");
         const overlay = document.getElementById("game-overlay");
