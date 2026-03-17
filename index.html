@@ -548,6 +548,16 @@
                 linear-gradient(180deg, #fef3c7 0%, #f59e0b 25%, #7c2d12 100%);
         }
 
+            #barber-canvas {
+                position: absolute;
+                inset: 18px;
+                width: calc(100% - 36px);
+                height: calc(100% - 36px);
+                border-radius: 24px;
+                z-index: 3;
+                cursor: crosshair;
+            }
+
         .salon-preview::before {
             content: "";
             position: absolute;
@@ -1514,6 +1524,7 @@
 
                     <div class="salon-preview">
                         <div class="salon-badge" id="salon-style-badge">Coupe longue</div>
+                        <canvas id="barber-canvas" width="820" height="560" aria-label="Zone de coupe manuelle"></canvas>
                         <div class="salon-floor"></div>
                         <div class="salon-chair"></div>
                         <div class="salon-avatar woman style-long" id="salon-avatar">
@@ -1944,6 +1955,8 @@
         const eyeButtons = Array.from(document.querySelectorAll("[data-eye]"));
         const toolButtons = Array.from(document.querySelectorAll("[data-tool]"));
         const salonPreview = document.querySelector(".salon-preview");
+        const barberCanvas = document.getElementById("barber-canvas");
+        const barberCtx = barberCanvas.getContext("2d");
         const serviceGender = document.getElementById("service-gender");
         const serviceStyle = document.getElementById("service-style");
         const serviceColor = document.getElementById("service-color");
@@ -2084,6 +2097,12 @@
         const tttState = {
             board: Array(9).fill(""),
             over: false
+        };
+
+        const barberState = {
+            strands: [],
+            pointerDown: false,
+            head: { x: 410, y: 250, r: 78 }
         };
 
         bestScoreValue.textContent = String(game.bestScore);
@@ -2386,6 +2405,126 @@
             renderTtt();
         }
 
+        function styleToHairRange(style) {
+            const ranges = {
+                long: [80, 140],
+                bob: [55, 95],
+                curly: [70, 120],
+                pixie: [28, 56],
+                fade: [14, 32],
+                quiff: [26, 64],
+                buzz: [6, 16]
+            };
+
+            return ranges[style] || [50, 90];
+        }
+
+        function makeStrands() {
+            const [minLen, maxLen] = styleToHairRange(salonState.style);
+            const strands = [];
+            const count = 90;
+
+            for (let i = 0; i < count; i += 1) {
+                const angle = Math.PI + (i / (count - 1)) * Math.PI;
+                const rootX = barberState.head.x + Math.cos(angle) * barberState.head.r * 0.95;
+                const rootY = barberState.head.y + Math.sin(angle) * barberState.head.r * 0.78 - 18;
+                const length = minLen + Math.random() * (maxLen - minLen);
+                strands.push({
+                    rootX,
+                    rootY,
+                    angle: angle - Math.PI / 2,
+                    length,
+                    wave: salonState.style === "curly" ? 0.9 : 0.15,
+                    color: salonState.hairColor
+                });
+            }
+
+            barberState.strands = strands;
+        }
+
+        function drawBarber() {
+            barberCtx.clearRect(0, 0, barberCanvas.width, barberCanvas.height);
+
+            const bg = barberCtx.createLinearGradient(0, 0, 0, barberCanvas.height);
+            bg.addColorStop(0, "#fef3c7");
+            bg.addColorStop(1, "#78350f");
+            barberCtx.fillStyle = bg;
+            barberCtx.fillRect(0, 0, barberCanvas.width, barberCanvas.height);
+
+            barberCtx.fillStyle = "#7f1d1d";
+            barberCtx.fillRect(280, 420, 260, 110);
+
+            barberCtx.fillStyle = salonState.outfitColor;
+            barberCtx.beginPath();
+            barberCtx.roundRect(300, 330, 220, 120, 28);
+            barberCtx.fill();
+
+            barberCtx.fillStyle = salonState.skinColor;
+            barberCtx.beginPath();
+            barberCtx.arc(barberState.head.x, barberState.head.y, barberState.head.r, 0, Math.PI * 2);
+            barberCtx.fill();
+
+            barberCtx.lineCap = "round";
+            barberState.strands.forEach((strand) => {
+                barberCtx.strokeStyle = strand.color;
+                barberCtx.lineWidth = 3;
+                barberCtx.beginPath();
+                barberCtx.moveTo(strand.rootX, strand.rootY);
+                const bendX = strand.rootX + Math.cos(strand.angle + strand.wave) * strand.length * 0.55;
+                const bendY = strand.rootY + Math.sin(strand.angle + strand.wave) * strand.length * 0.55;
+                const tipX = strand.rootX + Math.cos(strand.angle) * strand.length;
+                const tipY = strand.rootY + Math.sin(strand.angle) * strand.length;
+                barberCtx.quadraticCurveTo(bendX, bendY, tipX, tipY);
+                barberCtx.stroke();
+            });
+
+            barberCtx.fillStyle = salonState.eyeColor;
+            const eyeR = salonState.eyeSize / 2;
+            barberCtx.beginPath();
+            barberCtx.arc(380, 250, eyeR, 0, Math.PI * 2);
+            barberCtx.arc(440, 250, eyeR, 0, Math.PI * 2);
+            barberCtx.fill();
+
+            barberCtx.strokeStyle = "#111827";
+            barberCtx.lineWidth = 4;
+            barberCtx.beginPath();
+            barberCtx.arc(410, 282, 16, 0.1, Math.PI - 0.1);
+            barberCtx.stroke();
+
+            barberCtx.fillStyle = "rgba(2,6,23,0.75)";
+            barberCtx.fillRect(16, 14, 270, 40);
+            barberCtx.fillStyle = "#fff";
+            barberCtx.font = "700 16px Trebuchet MS";
+            barberCtx.fillText("Outil: " + salonState.tool + "  |  Clique et glisse pour couper", 24, 40);
+        }
+
+        function applyBarberTool(x, y) {
+            barberState.strands.forEach((strand) => {
+                const tipX = strand.rootX + Math.cos(strand.angle) * strand.length;
+                const tipY = strand.rootY + Math.sin(strand.angle) * strand.length;
+                const distance = Math.hypot(x - tipX, y - tipY);
+
+                if (distance > 24) {
+                    return;
+                }
+
+                if (salonState.tool === "scissors") {
+                    strand.length = Math.max(8, strand.length - 7);
+                } else if (salonState.tool === "clipper") {
+                    strand.length = Math.max(3, strand.length - 14);
+                } else if (salonState.tool === "dye") {
+                    strand.color = salonState.hairColor;
+                } else if (salonState.tool === "curl") {
+                    strand.wave = Math.min(1.6, strand.wave + 0.12);
+                } else if (salonState.tool === "wash") {
+                    strand.color = "#4b2e1f";
+                    strand.wave = Math.max(0.08, strand.wave - 0.1);
+                }
+            });
+
+            drawBarber();
+        }
+
         function updateSalon() {
             salonAvatar.className = "salon-avatar " + salonState.gender + " style-" + salonState.style;
             if (salonState.beard !== "none") {
@@ -2444,6 +2583,11 @@
             browRange.value = String(salonState.browTilt);
             glassesToggle.checked = salonState.glasses;
             earringsToggle.checked = salonState.earrings;
+
+            if (!barberState.strands.length) {
+                makeStrands();
+            }
+            drawBarber();
         }
 
         function applySalonPreset(nextState) {
@@ -2989,7 +3133,40 @@
             });
         });
 
+        function barberPointFromEvent(event) {
+            const rect = barberCanvas.getBoundingClientRect();
+            const scaleX = barberCanvas.width / rect.width;
+            const scaleY = barberCanvas.height / rect.height;
+            return {
+                x: (event.clientX - rect.left) * scaleX,
+                y: (event.clientY - rect.top) * scaleY
+            };
+        }
+
+        barberCanvas.addEventListener("pointerdown", (event) => {
+            barberState.pointerDown = true;
+            const point = barberPointFromEvent(event);
+            applyBarberTool(point.x, point.y);
+        });
+
+        barberCanvas.addEventListener("pointermove", (event) => {
+            if (!barberState.pointerDown) {
+                return;
+            }
+
+            const point = barberPointFromEvent(event);
+            applyBarberTool(point.x, point.y);
+        });
+
+        window.addEventListener("pointerup", () => {
+            barberState.pointerDown = false;
+        });
+
         salonPreview.addEventListener("click", () => {
+            if (barberCanvas) {
+                return;
+            }
+
             if (salonState.tool === "scissors") {
                 applySalonPreset({ cut: Math.min(60, salonState.cut + 4) });
                 return;
@@ -3062,6 +3239,8 @@
                 browTilt: 0,
                 tool: "scissors"
             });
+            makeStrands();
+            drawBarber();
         });
 
         resetGame();
@@ -3070,6 +3249,8 @@
         resetSnake();
         pongReset.click();
         resetTtt();
+        makeStrands();
+        drawBarber();
         updateSalon();
     </script>
 </body>
