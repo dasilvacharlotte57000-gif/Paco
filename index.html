@@ -108,7 +108,7 @@
 
         .hero {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1fr;
             gap: 24px;
             margin-top: 28px;
         }
@@ -127,7 +127,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 32px;
-            padding: 42px;
+            padding: 34px;
         }
 
         .hero-panel::after {
@@ -152,24 +152,24 @@
         }
 
         .hero h2 {
-            max-width: 10ch;
-            margin-top: 22px;
-            font-size: clamp(2.8rem, 6vw, 5.4rem);
-            line-height: 0.95;
+            max-width: 18ch;
+            margin-top: 16px;
+            font-size: clamp(2rem, 4.8vw, 3.4rem);
+            line-height: 1.06;
         }
 
         .subtitle {
             max-width: 56ch;
-            margin-top: 18px;
-            font-size: 1.05rem;
-            line-height: 1.7;
+            margin-top: 14px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 14px;
-            margin-top: 28px;
+            margin-top: 20px;
         }
 
         .button {
@@ -202,7 +202,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            margin-top: 30px;
+            margin-top: 22px;
         }
 
         .hero-stats div {
@@ -219,7 +219,7 @@
         }
 
         .aside-panel {
-            display: grid;
+            display: none;
             gap: 18px;
             align-content: start;
             border-radius: 28px;
@@ -316,7 +316,7 @@
             border-radius: 18px;
             display: grid;
             place-items: center;
-            font-size: 1.5rem;
+            font-size: 1.9rem;
             font-weight: 900;
             color: #fff;
         }
@@ -327,6 +327,10 @@
         .icon.gold { background: linear-gradient(135deg, #f59e0b, #eab308); }
         .icon.red { background: linear-gradient(135deg, #ef4444, #f97316); }
         .icon.pink { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
+
+        .icon span {
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.28));
+        }
 
         .pill {
             padding: 8px 10px;
@@ -933,6 +937,78 @@
             color: var(--text);
         }
 
+        .arcade-panel {
+            border: 1px solid var(--panel-border);
+            background: var(--panel);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow);
+            border-radius: 28px;
+            padding: 24px;
+        }
+
+        .arcade-stack {
+            display: grid;
+            gap: 14px;
+        }
+
+        .cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 64px;
+        }
+
+        .card-chip {
+            min-width: 46px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .action-row .button {
+            min-width: 130px;
+            padding: 11px 14px;
+        }
+
+        .canvas-shell {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: #0b1220;
+        }
+
+        #snake-canvas,
+        #pong-canvas {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 10;
+        }
+
+        .ttt-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .ttt-cell {
+            height: 90px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .ttt-cell:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
         footer {
             margin-top: 36px;
             padding: 24px 6px 8px;
@@ -1003,7 +1079,8 @@
             .playable-panel,
             .playable-info,
             .salon-stage,
-            .salon-controls {
+            .salon-controls,
+            .arcade-panel {
                 border-radius: 22px;
             }
 
@@ -1030,23 +1107,22 @@
             <nav class="nav" aria-label="Navigation principale">
                 <a href="#" onclick="navigateTo('/')">Accueil</a>
                 <a href="#jeux">Jeux</a>
-                <a href="#top">Top picks</a>
-                <a href="#nouveaux">Nouveautes</a>
+                <a href="#top">Decouvrir</a>
             </nav>
         </header>
 
         <main>
             <section class="hero" id="top">
                 <div class="hero-panel">
-                    <div class="eyebrow">Arcade en ligne • Parties instantanees</div>
-                    <h2>Ta page d'accueil pour jouer sans attendre</h2>
+                    <div class="eyebrow">Paco Arcade • Mini jeux instantanes</div>
+                    <h2>Choisis un jeu et lance ta partie en un clic</h2>
                     <p class="subtitle">
-                        Retrouve des jeux rapides a prendre en main comme Blackjack, Flappy Bird,
-                        Snake, Pong ou Morpion. L'idee est simple: un clic, une partie, du fun.
+                        Une home plus simple, propre et rapide: tu choisis ton jeu, tu ouvres la page,
+                        et tu joues tout de suite. Flappy et Salon sont deja jouables.
                     </p>
                     <div class="hero-actions">
-                        <a class="button button-primary" href="#jouer">Jouer maintenant</a>
-                        <a class="button button-secondary" href="#nouveaux">Decouvrir les nouveautes</a>
+                        <a class="button button-primary" href="#jeux">Voir les jeux</a>
+                        <a class="button button-secondary" href="/" onclick="navigateTo('/flappy'); return false;">Jouer a Flappy</a>
                     </div>
                     <div class="hero-stats">
                         <div>
@@ -1100,7 +1176,7 @@
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon orange">21</div>
+                                <div class="icon orange"><span>🃏</span></div>
                                 <span class="pill">Cartes</span>
                             </div>
                             <h4>Blackjack</h4>
@@ -1112,14 +1188,14 @@
                                 <span>Strategie</span>
                                 <span>Solo</span>
                             </div>
-                            <a class="game-link" href="#jouer">Jouer ici</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/blackjack'); return false;">Jouer ici</a>
                         </div>
                     </article>
 
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon blue">F</div>
+                                <div class="icon blue"><span>🐦</span></div>
                                 <span class="pill">Arcade</span>
                             </div>
                             <h4>Flappy Bird</h4>
@@ -1138,7 +1214,7 @@
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon green">S</div>
+                                <div class="icon green"><span>🐍</span></div>
                                 <span class="pill">Retro</span>
                             </div>
                             <h4>Snake</h4>
@@ -1150,14 +1226,14 @@
                                 <span>Progressif</span>
                                 <span>Solo</span>
                             </div>
-                            <a class="game-link" href="#">Jouer bientot</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/snake'); return false;">Jouer ici</a>
                         </div>
                     </article>
 
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon gold">P</div>
+                                <div class="icon gold"><span>🏓</span></div>
                                 <span class="pill">Duel</span>
                             </div>
                             <h4>Pong</h4>
@@ -1169,14 +1245,14 @@
                                 <span>Arcade</span>
                                 <span>Classique</span>
                             </div>
-                            <a class="game-link" href="#">Jouer bientot</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/pong'); return false;">Jouer ici</a>
                         </div>
                     </article>
 
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon red">X</div>
+                                <div class="icon red"><span>❌</span></div>
                                 <span class="pill">Logique</span>
                             </div>
                             <h4>Morpion</h4>
@@ -1188,14 +1264,14 @@
                                 <span>Court</span>
                                 <span>Accessible</span>
                             </div>
-                            <a class="game-link" href="#">Jouer bientot</a>
+                            <a class="game-link" href="/" onclick="navigateTo('/morpion'); return false;">Jouer ici</a>
                         </div>
                     </article>
 
                     <article class="game-card">
                         <div>
                             <div class="game-top">
-                                <div class="icon pink">C</div>
+                                <div class="icon pink"><span>💇</span></div>
                                 <span class="pill">Creation</span>
                             </div>
                             <h4>Salon Studio</h4>
@@ -1414,6 +1490,190 @@
             <p>Paco Arcade • Salon Studio - coiffure au complet</p>
         </footer>
     </div>
+
+    <div class="page hidden" id="blackjack-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">🃏</div>
+                <div>
+                    <h1>Blackjack</h1>
+                    <p>Atteins 21 sans depasser</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+        <main>
+            <section class="playable-section">
+                <div class="arcade-panel arcade-stack">
+                    <div class="playable-header">
+                        <h3>Table de jeu</h3>
+                        <span class="status-chip" id="bj-status">En attente</span>
+                    </div>
+                    <div class="scoreboard">
+                        <div class="score-card"><span>Toi</span><strong id="bj-player-total">0</strong></div>
+                        <div class="score-card"><span>Dealer</span><strong id="bj-dealer-total">0</strong></div>
+                    </div>
+                    <div>
+                        <p class="subtitle">Main dealer</p>
+                        <div class="cards-row" id="bj-dealer-cards"></div>
+                    </div>
+                    <div>
+                        <p class="subtitle">Ta main</p>
+                        <div class="cards-row" id="bj-player-cards"></div>
+                    </div>
+                    <div class="action-row">
+                        <button class="button button-primary" id="bj-hit" type="button">Piocher</button>
+                        <button class="button button-secondary" id="bj-stand" type="button">Rester</button>
+                        <button class="button button-secondary" id="bj-new" type="button">Nouvelle partie</button>
+                    </div>
+                </div>
+                <aside class="playable-info">
+                    <h3>Regles rapides</h3>
+                    <ul class="tips">
+                        <li><strong>But:</strong> faire plus que le dealer sans depasser 21.</li>
+                        <li><strong>As:</strong> compte pour 11 puis repasse a 1 si necessaire.</li>
+                        <li><strong>Dealer:</strong> tire jusqu'a 17 minimum.</li>
+                    </ul>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div class="page hidden" id="snake-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">🐍</div>
+                <div>
+                    <h1>Snake</h1>
+                    <p>Mange et grandis</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+        <main>
+            <section class="playable-section">
+                <div class="arcade-panel arcade-stack">
+                    <div class="playable-header">
+                        <h3>Snake jouable</h3>
+                        <span class="status-chip" id="snake-status">Pret</span>
+                    </div>
+                    <div class="scoreboard">
+                        <div class="score-card"><span>Score</span><strong id="snake-score">0</strong></div>
+                        <div class="score-card"><span>Best</span><strong id="snake-best">0</strong></div>
+                    </div>
+                    <div class="canvas-shell">
+                        <canvas id="snake-canvas" width="800" height="500" aria-label="Zone de jeu Snake"></canvas>
+                    </div>
+                    <div class="action-row">
+                        <button class="button button-primary" id="snake-start" type="button">Demarrer</button>
+                        <button class="button button-secondary" id="snake-reset" type="button">Reset</button>
+                    </div>
+                </div>
+                <aside class="playable-info">
+                    <h3>Controles</h3>
+                    <ul class="tips">
+                        <li><strong>Fleches:</strong> deplace le serpent.</li>
+                        <li><strong>Objectif:</strong> mange les pommes rouges.</li>
+                        <li><strong>Attention:</strong> evite les murs et ton corps.</li>
+                    </ul>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div class="page hidden" id="pong-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">🏓</div>
+                <div>
+                    <h1>Pong</h1>
+                    <p>Duel contre l'IA</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+        <main>
+            <section class="playable-section">
+                <div class="arcade-panel arcade-stack">
+                    <div class="playable-header">
+                        <h3>Pong jouable</h3>
+                        <span class="status-chip" id="pong-status">Pret</span>
+                    </div>
+                    <div class="scoreboard">
+                        <div class="score-card"><span>Toi</span><strong id="pong-player">0</strong></div>
+                        <div class="score-card"><span>IA</span><strong id="pong-ai">0</strong></div>
+                    </div>
+                    <div class="canvas-shell">
+                        <canvas id="pong-canvas" width="800" height="500" aria-label="Zone de jeu Pong"></canvas>
+                    </div>
+                    <div class="action-row">
+                        <button class="button button-primary" id="pong-start" type="button">Demarrer</button>
+                        <button class="button button-secondary" id="pong-reset" type="button">Reset</button>
+                    </div>
+                </div>
+                <aside class="playable-info">
+                    <h3>Controles</h3>
+                    <ul class="tips">
+                        <li><strong>W / S</strong> ou <strong>Fleche haut / bas</strong> pour bouger.</li>
+                        <li><strong>Objectif:</strong> atteindre 7 points.</li>
+                    </ul>
+                </aside>
+            </section>
+        </main>
+    </div>
+
+    <div class="page hidden" id="morpion-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">❌</div>
+                <div>
+                    <h1>Morpion</h1>
+                    <p>Joue contre l'IA</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+            </nav>
+        </header>
+        <main>
+            <section class="playable-section">
+                <div class="arcade-panel arcade-stack">
+                    <div class="playable-header">
+                        <h3>Morpion jouable</h3>
+                        <span class="status-chip" id="ttt-status">Ton tour</span>
+                    </div>
+                    <div class="ttt-grid" id="ttt-grid">
+                        <button class="ttt-cell" data-cell="0" type="button"></button>
+                        <button class="ttt-cell" data-cell="1" type="button"></button>
+                        <button class="ttt-cell" data-cell="2" type="button"></button>
+                        <button class="ttt-cell" data-cell="3" type="button"></button>
+                        <button class="ttt-cell" data-cell="4" type="button"></button>
+                        <button class="ttt-cell" data-cell="5" type="button"></button>
+                        <button class="ttt-cell" data-cell="6" type="button"></button>
+                        <button class="ttt-cell" data-cell="7" type="button"></button>
+                        <button class="ttt-cell" data-cell="8" type="button"></button>
+                    </div>
+                    <div class="action-row">
+                        <button class="button button-secondary" id="ttt-reset" type="button">Rejouer</button>
+                    </div>
+                </div>
+                <aside class="playable-info">
+                    <h3>Regles</h3>
+                    <ul class="tips">
+                        <li><strong>Tu joues X</strong>, l'IA joue O.</li>
+                        <li><strong>But:</strong> aligner 3 symboles.</li>
+                    </ul>
+                </aside>
+            </section>
+        </main>
+    </div>
+
     <script>
         // ==================== ROUTING SYSTEM ====================
         function navigateTo(path) {
@@ -1422,13 +1682,27 @@
 
             if (path === "/") {
                 document.getElementById("home").classList.remove("hidden");
+            } else if (path === "/blackjack") {
+                document.getElementById("blackjack-page").classList.remove("hidden");
             } else if (path === "/flappy") {
                 document.getElementById("flappy-page").classList.remove("hidden");
+            } else if (path === "/snake") {
+                document.getElementById("snake-page").classList.remove("hidden");
+            } else if (path === "/pong") {
+                document.getElementById("pong-page").classList.remove("hidden");
+            } else if (path === "/morpion") {
+                document.getElementById("morpion-page").classList.remove("hidden");
             } else if (path === "/salon") {
                 document.getElementById("salon-page").classList.remove("hidden");
+            } else {
+                document.getElementById("home").classList.remove("hidden");
             }
 
             window.scrollTo(0, 0);
+        }
+
+        function isPageVisible(pageId) {
+            return !document.getElementById(pageId).classList.contains("hidden");
         }
 
         // Initialize router on page load
@@ -1461,6 +1735,31 @@
         const serviceColor = document.getElementById("service-color");
         const serviceFade = document.getElementById("service-fade");
         const serviceCut = document.getElementById("service-cut");
+        const bjDealerCards = document.getElementById("bj-dealer-cards");
+        const bjPlayerCards = document.getElementById("bj-player-cards");
+        const bjPlayerTotal = document.getElementById("bj-player-total");
+        const bjDealerTotal = document.getElementById("bj-dealer-total");
+        const bjStatus = document.getElementById("bj-status");
+        const bjHit = document.getElementById("bj-hit");
+        const bjStand = document.getElementById("bj-stand");
+        const bjNew = document.getElementById("bj-new");
+        const snakeCanvas = document.getElementById("snake-canvas");
+        const snakeCtx = snakeCanvas.getContext("2d");
+        const snakeStatus = document.getElementById("snake-status");
+        const snakeScoreEl = document.getElementById("snake-score");
+        const snakeBestEl = document.getElementById("snake-best");
+        const snakeStart = document.getElementById("snake-start");
+        const snakeReset = document.getElementById("snake-reset");
+        const pongCanvas = document.getElementById("pong-canvas");
+        const pongCtx = pongCanvas.getContext("2d");
+        const pongStatus = document.getElementById("pong-status");
+        const pongPlayerEl = document.getElementById("pong-player");
+        const pongAiEl = document.getElementById("pong-ai");
+        const pongStart = document.getElementById("pong-start");
+        const pongReset = document.getElementById("pong-reset");
+        const tttCells = Array.from(document.querySelectorAll(".ttt-cell"));
+        const tttStatus = document.getElementById("ttt-status");
+        const tttReset = document.getElementById("ttt-reset");
 
         const game = {
             birdX: 180,
@@ -1516,7 +1815,318 @@
         const outfitChoices = ["#f97316", "#8b5cf6", "#0ea5e9", "#22c55e", "#ef4444"];
         const styleChoices = Object.keys(styleLabels);
 
+        const blackjackState = {
+            player: [],
+            dealer: [],
+            over: false,
+            message: "En attente"
+        };
+
+        const snakeState = {
+            body: [{ x: 6, y: 6 }],
+            dir: { x: 1, y: 0 },
+            nextDir: { x: 1, y: 0 },
+            food: { x: 12, y: 8 },
+            score: 0,
+            best: Number(localStorage.getItem("paco-snake-best") || 0),
+            running: false,
+            timer: null,
+            gridX: 20,
+            gridY: 14
+        };
+
+        const pongState = {
+            running: false,
+            raf: null,
+            playerY: 180,
+            aiY: 180,
+            playerScore: 0,
+            aiScore: 0,
+            ballX: 400,
+            ballY: 250,
+            ballVX: 4,
+            ballVY: 2.5,
+            up: false,
+            down: false
+        };
+
+        const tttState = {
+            board: Array(9).fill(""),
+            over: false
+        };
+
         bestScoreValue.textContent = String(game.bestScore);
+
+        function drawCard() {
+            const rank = Math.floor(Math.random() * 13) + 1;
+            if (rank === 1) {
+                return { value: 11, label: "A" };
+            }
+
+            if (rank >= 10) {
+                return { value: 10, label: ["10", "J", "Q", "K"][rank - 10] };
+            }
+
+            return { value: rank, label: String(rank) };
+        }
+
+        function handTotal(hand) {
+            let total = hand.reduce((sum, card) => sum + card.value, 0);
+            let aces = hand.filter((card) => card.label === "A").length;
+
+            while (total > 21 && aces > 0) {
+                total -= 10;
+                aces -= 1;
+            }
+
+            return total;
+        }
+
+        function renderBlackjack(hideDealerSecondCard) {
+            bjPlayerCards.innerHTML = "";
+            bjDealerCards.innerHTML = "";
+
+            blackjackState.player.forEach((card) => {
+                const chip = document.createElement("div");
+                chip.className = "card-chip";
+                chip.textContent = card.label;
+                bjPlayerCards.appendChild(chip);
+            });
+
+            blackjackState.dealer.forEach((card, index) => {
+                const chip = document.createElement("div");
+                chip.className = "card-chip";
+                chip.textContent = hideDealerSecondCard && index === 1 ? "?" : card.label;
+                bjDealerCards.appendChild(chip);
+            });
+
+            bjPlayerTotal.textContent = String(handTotal(blackjackState.player));
+            bjDealerTotal.textContent = hideDealerSecondCard
+                ? String(blackjackState.dealer[0].value)
+                : String(handTotal(blackjackState.dealer));
+            bjStatus.textContent = blackjackState.message;
+        }
+
+        function startBlackjack() {
+            blackjackState.player = [drawCard(), drawCard()];
+            blackjackState.dealer = [drawCard(), drawCard()];
+            blackjackState.over = false;
+            blackjackState.message = "A toi de jouer";
+            renderBlackjack(true);
+        }
+
+        function endBlackjack() {
+            const player = handTotal(blackjackState.player);
+            const dealer = handTotal(blackjackState.dealer);
+
+            if (player > 21) {
+                blackjackState.message = "Perdu: tu depasses 21";
+            } else if (dealer > 21) {
+                blackjackState.message = "Gagne: dealer depasse 21";
+            } else if (player > dealer) {
+                blackjackState.message = "Gagne";
+            } else if (player < dealer) {
+                blackjackState.message = "Perdu";
+            } else {
+                blackjackState.message = "Egalite";
+            }
+
+            blackjackState.over = true;
+            renderBlackjack(false);
+        }
+
+        function randomFoodPosition() {
+            let nextFood = { x: 0, y: 0 };
+
+            do {
+                nextFood = {
+                    x: Math.floor(Math.random() * snakeState.gridX),
+                    y: Math.floor(Math.random() * snakeState.gridY)
+                };
+            } while (snakeState.body.some((part) => part.x === nextFood.x && part.y === nextFood.y));
+
+            return nextFood;
+        }
+
+        function renderSnake() {
+            const cellW = snakeCanvas.width / snakeState.gridX;
+            const cellH = snakeCanvas.height / snakeState.gridY;
+
+            snakeCtx.fillStyle = "#020617";
+            snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+            snakeCtx.fillStyle = "#ef4444";
+            snakeCtx.fillRect(snakeState.food.x * cellW, snakeState.food.y * cellH, cellW - 2, cellH - 2);
+
+            snakeState.body.forEach((part, index) => {
+                snakeCtx.fillStyle = index === 0 ? "#22c55e" : "#16a34a";
+                snakeCtx.fillRect(part.x * cellW, part.y * cellH, cellW - 2, cellH - 2);
+            });
+        }
+
+        function resetSnake() {
+            snakeState.body = [{ x: 6, y: 6 }];
+            snakeState.dir = { x: 1, y: 0 };
+            snakeState.nextDir = { x: 1, y: 0 };
+            snakeState.food = randomFoodPosition();
+            snakeState.score = 0;
+            snakeScoreEl.textContent = "0";
+            snakeBestEl.textContent = String(snakeState.best);
+            snakeStatus.textContent = "Pret";
+            renderSnake();
+        }
+
+        function tickSnake() {
+            snakeState.dir = { ...snakeState.nextDir };
+            const head = { ...snakeState.body[0] };
+            head.x += snakeState.dir.x;
+            head.y += snakeState.dir.y;
+
+            const hitsWall = head.x < 0 || head.y < 0 || head.x >= snakeState.gridX || head.y >= snakeState.gridY;
+            const hitsSelf = snakeState.body.some((part) => part.x === head.x && part.y === head.y);
+
+            if (hitsWall || hitsSelf) {
+                snakeState.running = false;
+                clearInterval(snakeState.timer);
+                snakeState.timer = null;
+                snakeStatus.textContent = "Perdu";
+                return;
+            }
+
+            snakeState.body.unshift(head);
+
+            if (head.x === snakeState.food.x && head.y === snakeState.food.y) {
+                snakeState.score += 1;
+                snakeScoreEl.textContent = String(snakeState.score);
+                snakeState.food = randomFoodPosition();
+
+                if (snakeState.score > snakeState.best) {
+                    snakeState.best = snakeState.score;
+                    snakeBestEl.textContent = String(snakeState.best);
+                    localStorage.setItem("paco-snake-best", String(snakeState.best));
+                }
+            } else {
+                snakeState.body.pop();
+            }
+
+            renderSnake();
+        }
+
+        function resetPongBall(direction) {
+            pongState.ballX = pongCanvas.width / 2;
+            pongState.ballY = pongCanvas.height / 2;
+            pongState.ballVX = direction * 4;
+            pongState.ballVY = (Math.random() * 2 - 1) * 3;
+        }
+
+        function renderPong() {
+            const paddleH = 90;
+            const paddleW = 12;
+
+            pongCtx.fillStyle = "#020617";
+            pongCtx.fillRect(0, 0, pongCanvas.width, pongCanvas.height);
+
+            pongCtx.fillStyle = "#334155";
+            pongCtx.fillRect(pongCanvas.width / 2 - 2, 0, 4, pongCanvas.height);
+
+            pongCtx.fillStyle = "#f8fafc";
+            pongCtx.fillRect(24, pongState.playerY, paddleW, paddleH);
+            pongCtx.fillRect(pongCanvas.width - 36, pongState.aiY, paddleW, paddleH);
+
+            pongCtx.beginPath();
+            pongCtx.arc(pongState.ballX, pongState.ballY, 10, 0, Math.PI * 2);
+            pongCtx.fill();
+        }
+
+        function loopPong() {
+            if (!pongState.running) {
+                return;
+            }
+
+            const paddleH = 90;
+            const speed = 6;
+
+            if (pongState.up) {
+                pongState.playerY -= speed;
+            }
+            if (pongState.down) {
+                pongState.playerY += speed;
+            }
+
+            pongState.playerY = Math.max(0, Math.min(pongCanvas.height - paddleH, pongState.playerY));
+
+            const aiCenter = pongState.aiY + paddleH / 2;
+            if (aiCenter < pongState.ballY - 8) {
+                pongState.aiY += 4.2;
+            } else if (aiCenter > pongState.ballY + 8) {
+                pongState.aiY -= 4.2;
+            }
+            pongState.aiY = Math.max(0, Math.min(pongCanvas.height - paddleH, pongState.aiY));
+
+            pongState.ballX += pongState.ballVX;
+            pongState.ballY += pongState.ballVY;
+
+            if (pongState.ballY <= 10 || pongState.ballY >= pongCanvas.height - 10) {
+                pongState.ballVY *= -1;
+            }
+
+            if (pongState.ballX <= 38 && pongState.ballY > pongState.playerY && pongState.ballY < pongState.playerY + paddleH) {
+                pongState.ballVX = Math.abs(pongState.ballVX) + 0.2;
+            }
+
+            if (pongState.ballX >= pongCanvas.width - 38 && pongState.ballY > pongState.aiY && pongState.ballY < pongState.aiY + paddleH) {
+                pongState.ballVX = -Math.abs(pongState.ballVX) - 0.2;
+            }
+
+            if (pongState.ballX < 0) {
+                pongState.aiScore += 1;
+                pongAiEl.textContent = String(pongState.aiScore);
+                resetPongBall(1);
+            }
+
+            if (pongState.ballX > pongCanvas.width) {
+                pongState.playerScore += 1;
+                pongPlayerEl.textContent = String(pongState.playerScore);
+                resetPongBall(-1);
+            }
+
+            if (pongState.playerScore >= 7 || pongState.aiScore >= 7) {
+                pongState.running = false;
+                pongStatus.textContent = pongState.playerScore > pongState.aiScore ? "Victoire" : "Defaite";
+            }
+
+            renderPong();
+            pongState.raf = requestAnimationFrame(loopPong);
+        }
+
+        function winnerOnBoard(board) {
+            const lines = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (const [a, b, c] of lines) {
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return board[a];
+                }
+            }
+
+            return "";
+        }
+
+        function renderTtt() {
+            tttCells.forEach((cell, index) => {
+                cell.textContent = tttState.board[index];
+            });
+        }
+
+        function resetTtt() {
+            tttState.board = Array(9).fill("");
+            tttState.over = false;
+            tttStatus.textContent = "Ton tour";
+            renderTtt();
+        }
 
         function updateSalon() {
             salonAvatar.className = "salon-avatar " + salonState.gender + " style-" + salonState.style;
@@ -1790,14 +2400,185 @@
 
         startButton.addEventListener("click", startGame);
         canvas.addEventListener("click", handleInput);
+
         window.addEventListener("keydown", (event) => {
-            if (event.code !== "Space") {
+            if (event.code === "Space" && isPageVisible("flappy-page")) {
+                event.preventDefault();
+                handleInput();
+            }
+
+            if (!isPageVisible("snake-page")) {
                 return;
             }
 
+            const directionMap = {
+                ArrowUp: { x: 0, y: -1 },
+                ArrowDown: { x: 0, y: 1 },
+                ArrowLeft: { x: -1, y: 0 },
+                ArrowRight: { x: 1, y: 0 }
+            };
+
+            const nextDir = directionMap[event.key];
+            if (!nextDir) {
+                return;
+            }
+
+            if (snakeState.dir.x + nextDir.x === 0 && snakeState.dir.y + nextDir.y === 0) {
+                return;
+            }
+
+            snakeState.nextDir = nextDir;
             event.preventDefault();
-            handleInput();
         });
+
+        window.addEventListener("keydown", (event) => {
+            if (!isPageVisible("pong-page")) {
+                return;
+            }
+
+            if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+                pongState.up = true;
+            }
+
+            if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+                pongState.down = true;
+            }
+        });
+
+        window.addEventListener("keyup", (event) => {
+            if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
+                pongState.up = false;
+            }
+
+            if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
+                pongState.down = false;
+            }
+        });
+
+        bjNew.addEventListener("click", startBlackjack);
+        bjHit.addEventListener("click", () => {
+            if (blackjackState.over) {
+                return;
+            }
+
+            blackjackState.player.push(drawCard());
+            if (handTotal(blackjackState.player) > 21) {
+                endBlackjack();
+            } else {
+                renderBlackjack(true);
+            }
+        });
+
+        bjStand.addEventListener("click", () => {
+            if (blackjackState.over) {
+                return;
+            }
+
+            while (handTotal(blackjackState.dealer) < 17) {
+                blackjackState.dealer.push(drawCard());
+            }
+            endBlackjack();
+        });
+
+        snakeStart.addEventListener("click", () => {
+            if (snakeState.running) {
+                return;
+            }
+
+            snakeState.running = true;
+            snakeStatus.textContent = "En jeu";
+            snakeState.timer = setInterval(tickSnake, 120);
+        });
+
+        snakeReset.addEventListener("click", () => {
+            snakeState.running = false;
+            clearInterval(snakeState.timer);
+            snakeState.timer = null;
+            resetSnake();
+        });
+
+        pongStart.addEventListener("click", () => {
+            if (pongState.running) {
+                return;
+            }
+
+            pongState.running = true;
+            pongStatus.textContent = "En jeu";
+            loopPong();
+        });
+
+        pongReset.addEventListener("click", () => {
+            pongState.running = false;
+            if (pongState.raf) {
+                cancelAnimationFrame(pongState.raf);
+                pongState.raf = null;
+            }
+            pongState.playerScore = 0;
+            pongState.aiScore = 0;
+            pongPlayerEl.textContent = "0";
+            pongAiEl.textContent = "0";
+            pongStatus.textContent = "Pret";
+            pongState.playerY = 180;
+            pongState.aiY = 180;
+            resetPongBall(Math.random() > 0.5 ? 1 : -1);
+            renderPong();
+        });
+
+        function playTttAiMove() {
+            const empties = tttState.board
+                .map((value, index) => (value ? -1 : index))
+                .filter((index) => index >= 0);
+
+            if (!empties.length || tttState.over) {
+                return;
+            }
+
+            const pick = empties[Math.floor(Math.random() * empties.length)];
+            tttState.board[pick] = "O";
+
+            const winner = winnerOnBoard(tttState.board);
+            if (winner) {
+                tttState.over = true;
+                tttStatus.textContent = "Defaite";
+            } else if (tttState.board.every(Boolean)) {
+                tttState.over = true;
+                tttStatus.textContent = "Egalite";
+            } else {
+                tttStatus.textContent = "Ton tour";
+            }
+
+            renderTtt();
+        }
+
+        tttCells.forEach((cell) => {
+            cell.addEventListener("click", () => {
+                const index = Number(cell.dataset.cell);
+                if (tttState.over || tttState.board[index]) {
+                    return;
+                }
+
+                tttState.board[index] = "X";
+                renderTtt();
+
+                const winner = winnerOnBoard(tttState.board);
+                if (winner) {
+                    tttState.over = true;
+                    tttStatus.textContent = "Victoire";
+                    return;
+                }
+
+                if (tttState.board.every(Boolean)) {
+                    tttState.over = true;
+                    tttStatus.textContent = "Egalite";
+                    return;
+                }
+
+                tttStatus.textContent = "Tour IA";
+                setTimeout(playTttAiMove, 260);
+            });
+        });
+
+        tttReset.addEventListener("click", resetTtt);
 
         genderButtons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -1860,6 +2641,10 @@
 
         resetGame();
         render();
+        startBlackjack();
+        resetSnake();
+        pongReset.click();
+        resetTtt();
         updateSalon();
     </script>
 </body>
