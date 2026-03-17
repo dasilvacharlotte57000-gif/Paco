@@ -2620,7 +2620,12 @@
 
             barberCtx.fillStyle = salonState.outfitColor;
             barberCtx.beginPath();
-            barberCtx.roundRect(300, 330, 220, 120, 28);
+            if (typeof barberCtx.roundRect === "function") {
+                barberCtx.roundRect(300, 330, 220, 120, 28);
+            } else {
+                // Fallback for browsers without CanvasRenderingContext2D.roundRect.
+                barberCtx.rect(300, 330, 220, 120);
+            }
             barberCtx.fill();
 
             barberCtx.fillStyle = salonState.skinColor;
@@ -2756,6 +2761,11 @@
 
         function applySalonPreset(nextState) {
             Object.assign(salonState, nextState);
+
+            if (nextState.style || nextState.hairColor || nextState.cut || nextState.fade) {
+                makeStrands();
+            }
+
             updateSalon();
         }
 
@@ -3065,7 +3075,7 @@
         });
 
         bjHit.addEventListener("click", () => {
-            if (blackjackState.over) {
+            if (blackjackState.over || !blackjackState.roundStarted) {
                 return;
             }
 
@@ -3078,7 +3088,7 @@
         });
 
         bjStand.addEventListener("click", () => {
-            if (blackjackState.over) {
+            if (blackjackState.over || !blackjackState.roundStarted) {
                 return;
             }
 
@@ -3091,6 +3101,10 @@
         snakeStart.addEventListener("click", () => {
             if (snakeState.running) {
                 return;
+            }
+
+            if (snakeStatus.textContent === "Perdu") {
+                resetSnake();
             }
 
             snakeState.running = true;
@@ -3108,6 +3122,11 @@
         pongStart.addEventListener("click", () => {
             if (pongState.running) {
                 return;
+            }
+
+            if (pongState.raf) {
+                cancelAnimationFrame(pongState.raf);
+                pongState.raf = null;
             }
 
             pongState.running = true;
@@ -3327,7 +3346,7 @@
         });
 
         salonPreview.addEventListener("click", () => {
-            if (barberCanvas) {
+            if (!barberCanvas) {
                 return;
             }
 
