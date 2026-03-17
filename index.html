@@ -656,7 +656,7 @@
             height: 138px;
             border-radius: 45% 45% 42% 42%;
             background: var(--skin-color);
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(var(--head-scale, 1));
             z-index: 3;
             box-shadow: inset 0 -10px 0 rgba(255, 255, 255, 0.08);
         }
@@ -664,13 +664,13 @@
         .salon-eye,
         .salon-mouth {
             position: absolute;
-            background: #1f2937;
+            background: var(--eye-color, #1f2937);
         }
 
         .salon-eye {
             top: 54px;
-            width: 12px;
-            height: 12px;
+            width: var(--eye-size, 12px);
+            height: var(--eye-size, 12px);
             border-radius: 50%;
         }
 
@@ -689,6 +689,7 @@
             height: 12px;
             border-radius: 0 0 24px 24px;
             transform: translateX(-50%);
+            background: #1f2937;
         }
 
         .salon-hair-back,
@@ -832,6 +833,84 @@
             font-weight: 700;
         }
 
+        .salon-brow,
+        .salon-beard,
+        .salon-glasses,
+        .salon-earring {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .salon-brow {
+            width: 26px;
+            height: 6px;
+            background: color-mix(in srgb, var(--hair-color) 90%, black 10%);
+            top: 42px;
+            border-radius: 8px;
+            transform: rotate(var(--brow-tilt, 0deg));
+        }
+
+        .salon-brow.left { left: 20px; }
+        .salon-brow.right { right: 20px; transform: rotate(calc(var(--brow-tilt, 0deg) * -1)); }
+
+        .salon-beard {
+            left: 50%;
+            bottom: 10px;
+            width: 52px;
+            height: 28px;
+            border-radius: 0 0 26px 26px;
+            transform: translateX(-50%);
+            background: color-mix(in srgb, var(--hair-color) 80%, black 20%);
+            display: none;
+        }
+
+        .salon-avatar.beard-light .salon-beard {
+            display: block;
+            opacity: 0.5;
+        }
+
+        .salon-avatar.beard-full .salon-beard {
+            display: block;
+            opacity: 0.95;
+            height: 34px;
+        }
+
+        .salon-glasses {
+            top: 50px;
+            left: 50%;
+            width: 78px;
+            height: 22px;
+            transform: translateX(-50%);
+            border-top: 3px solid #111827;
+            border-bottom: 3px solid #111827;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .salon-avatar.has-glasses .salon-glasses {
+            display: block;
+        }
+
+        .salon-earring {
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(180deg, #fde68a, #f59e0b);
+            border-radius: 999px;
+            top: 78px;
+            display: none;
+        }
+
+        .salon-earring.left { left: 6px; }
+        .salon-earring.right { right: 6px; }
+
+        .salon-avatar.has-earrings .salon-earring {
+            display: block;
+        }
+
+        .tool-button.active {
+            background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+        }
+
         .salon-tools {
             display: grid;
             gap: 16px;
@@ -965,6 +1044,49 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.14);
             text-align: center;
+            font-weight: 700;
+        }
+
+        .blackjack-table {
+            padding: 16px;
+            border-radius: 20px;
+            background: radial-gradient(circle at top, #15803d 0%, #14532d 55%, #052e16 100%);
+            border: 2px solid rgba(254, 240, 138, 0.35);
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.06);
+        }
+
+        .dealer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .dealer-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+            background: linear-gradient(135deg, #1f2937, #111827);
+            border: 2px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .chip-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip-btn {
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: #fff;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px 12px;
+            cursor: pointer;
             font-weight: 700;
         }
 
@@ -1399,8 +1521,14 @@
                             <div class="salon-fade-left"></div>
                             <div class="salon-fade-right"></div>
                             <div class="salon-head">
+                                <span class="salon-brow left"></span>
+                                <span class="salon-brow right"></span>
                                 <span class="salon-eye left"></span>
                                 <span class="salon-eye right"></span>
+                                <span class="salon-glasses"></span>
+                                <span class="salon-earring left"></span>
+                                <span class="salon-earring right"></span>
+                                <span class="salon-beard"></span>
                                 <span class="salon-mouth"></span>
                             </div>
                             <div class="salon-hair-front"></div>
@@ -1415,6 +1543,18 @@
                     <p class="subtitle">Teste plusieurs styles rapidement et compose un look complet depuis la page d'accueil.</p>
 
                     <div class="salon-tools">
+                        <div class="tool-group">
+                            <label>Outil actif</label>
+                            <div class="action-row">
+                                <button class="action-button tool-button active" type="button" data-tool="scissors">Ciseaux</button>
+                                <button class="action-button tool-button" type="button" data-tool="clipper">Tondeuse</button>
+                                <button class="action-button tool-button" type="button" data-tool="dye">Coloration</button>
+                                <button class="action-button tool-button" type="button" data-tool="curl">Boucleur</button>
+                                <button class="action-button tool-button" type="button" data-tool="wash">Shampooing</button>
+                            </div>
+                            <p class="subtitle">Clique sur le personnage pour appliquer l'outil.</p>
+                        </div>
+
                         <fieldset class="tool-group">
                             <legend>Client</legend>
                             <div class="gender-switch">
@@ -1469,6 +1609,55 @@
                             </select>
                         </div>
 
+                        <div class="tool-group">
+                            <label for="beard-select">Barbe</label>
+                            <select id="beard-select">
+                                <option value="none">Aucune</option>
+                                <option value="light">Legere</option>
+                                <option value="full">Complete</option>
+                            </select>
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Couleur de peau</label>
+                            <div class="swatch-row" id="skin-swatches">
+                                <button class="swatch-button active" type="button" data-skin="#f1c8a6" style="background:#f1c8a6" aria-label="Peau claire"></button>
+                                <button class="swatch-button" type="button" data-skin="#d8a17a" style="background:#d8a17a" aria-label="Peau medium"></button>
+                                <button class="swatch-button" type="button" data-skin="#b77953" style="background:#b77953" aria-label="Peau mate"></button>
+                                <button class="swatch-button" type="button" data-skin="#8d5a3b" style="background:#8d5a3b" aria-label="Peau foncee"></button>
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <label>Couleur des yeux</label>
+                            <div class="swatch-row" id="eye-swatches">
+                                <button class="swatch-button active" type="button" data-eye="#1f2937" style="background:#1f2937" aria-label="Noir"></button>
+                                <button class="swatch-button" type="button" data-eye="#2563eb" style="background:#2563eb" aria-label="Bleu"></button>
+                                <button class="swatch-button" type="button" data-eye="#16a34a" style="background:#16a34a" aria-label="Vert"></button>
+                                <button class="swatch-button" type="button" data-eye="#7c2d12" style="background:#7c2d12" aria-label="Marron"></button>
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <label for="head-range">Forme du visage</label>
+                            <input id="head-range" type="range" min="85" max="120" value="100">
+                        </div>
+
+                        <div class="tool-group">
+                            <label for="eye-range">Taille des yeux</label>
+                            <input id="eye-range" type="range" min="8" max="18" value="12">
+                        </div>
+
+                        <div class="tool-group">
+                            <label for="brow-range">Courbe des sourcils</label>
+                            <input id="brow-range" type="range" min="-25" max="25" value="0">
+                        </div>
+
+                        <div class="tool-group">
+                            <label><input id="glasses-toggle" type="checkbox"> Lunettes</label>
+                            <label><input id="earrings-toggle" type="checkbox"> Boucles d'oreilles</label>
+                        </div>
+
                         <div class="action-row">
                             <button class="action-button" type="button" id="random-style-button">Style aleatoire</button>
                             <button class="action-button" type="button" id="reset-style-button">Remise a zero</button>
@@ -1514,14 +1703,29 @@
                     <div class="scoreboard">
                         <div class="score-card"><span>Toi</span><strong id="bj-player-total">0</strong></div>
                         <div class="score-card"><span>Dealer</span><strong id="bj-dealer-total">0</strong></div>
+                        <div class="score-card"><span>Bankroll</span><strong id="bj-bankroll">500</strong></div>
+                        <div class="score-card"><span>Mise</span><strong id="bj-bet">50</strong></div>
                     </div>
-                    <div>
-                        <p class="subtitle">Main dealer</p>
-                        <div class="cards-row" id="bj-dealer-cards"></div>
-                    </div>
-                    <div>
-                        <p class="subtitle">Ta main</p>
-                        <div class="cards-row" id="bj-player-cards"></div>
+                    <div class="blackjack-table">
+                        <div class="dealer-row">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <div class="dealer-avatar" id="bj-dealer-avatar">🙂</div>
+                                <p class="subtitle">Croupier</p>
+                            </div>
+                            <div class="chip-row">
+                                <button class="chip-btn" type="button" data-bj-bet="25">+25</button>
+                                <button class="chip-btn" type="button" data-bj-bet="50">+50</button>
+                                <button class="chip-btn" type="button" data-bj-bet="100">+100</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="subtitle">Main dealer</p>
+                            <div class="cards-row" id="bj-dealer-cards"></div>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <p class="subtitle">Ta main</p>
+                            <div class="cards-row" id="bj-player-cards"></div>
+                        </div>
                     </div>
                     <div class="action-row">
                         <button class="button button-primary" id="bj-hit" type="button">Piocher</button>
@@ -1730,6 +1934,16 @@
         const colorButtons = Array.from(document.querySelectorAll("[data-color]"));
         const randomStyleButton = document.getElementById("random-style-button");
         const resetStyleButton = document.getElementById("reset-style-button");
+        const beardSelect = document.getElementById("beard-select");
+        const headRange = document.getElementById("head-range");
+        const eyeRange = document.getElementById("eye-range");
+        const browRange = document.getElementById("brow-range");
+        const glassesToggle = document.getElementById("glasses-toggle");
+        const earringsToggle = document.getElementById("earrings-toggle");
+        const skinButtons = Array.from(document.querySelectorAll("[data-skin]"));
+        const eyeButtons = Array.from(document.querySelectorAll("[data-eye]"));
+        const toolButtons = Array.from(document.querySelectorAll("[data-tool]"));
+        const salonPreview = document.querySelector(".salon-preview");
         const serviceGender = document.getElementById("service-gender");
         const serviceStyle = document.getElementById("service-style");
         const serviceColor = document.getElementById("service-color");
@@ -1740,6 +1954,10 @@
         const bjPlayerTotal = document.getElementById("bj-player-total");
         const bjDealerTotal = document.getElementById("bj-dealer-total");
         const bjStatus = document.getElementById("bj-status");
+        const bjBankroll = document.getElementById("bj-bankroll");
+        const bjBet = document.getElementById("bj-bet");
+        const bjDealerAvatar = document.getElementById("bj-dealer-avatar");
+        const bjChipButtons = Array.from(document.querySelectorAll("[data-bj-bet]"));
         const bjHit = document.getElementById("bj-hit");
         const bjStand = document.getElementById("bj-stand");
         const bjNew = document.getElementById("bj-new");
@@ -1790,7 +2008,16 @@
             hairLabel: "Brun profond",
             outfitColor: "#f97316",
             cut: 8,
-            fade: 12
+            fade: 12,
+            skinColor: "#f1c8a6",
+            eyeColor: "#1f2937",
+            beard: "none",
+            glasses: false,
+            earrings: false,
+            headScale: 1,
+            eyeSize: 12,
+            browTilt: 0,
+            tool: "scissors"
         };
 
         const styleLabels = {
@@ -1819,7 +2046,10 @@
             player: [],
             dealer: [],
             over: false,
-            message: "En attente"
+            message: "En attente",
+            bank: 500,
+            bet: 50,
+            roundStarted: false
         };
 
         const snakeState = {
@@ -1831,6 +2061,7 @@
             best: Number(localStorage.getItem("paco-snake-best") || 0),
             running: false,
             timer: null,
+            speed: 120,
             gridX: 20,
             gridY: 14
         };
@@ -1905,12 +2136,25 @@
                 ? String(blackjackState.dealer[0].value)
                 : String(handTotal(blackjackState.dealer));
             bjStatus.textContent = blackjackState.message;
+            bjBankroll.textContent = String(blackjackState.bank);
+            bjBet.textContent = String(blackjackState.bet);
+            bjDealerAvatar.textContent = blackjackState.over
+                ? (blackjackState.message.includes("Gagne") ? "😵" : blackjackState.message.includes("Perdu") ? "😎" : "🙂")
+                : "🕴️";
         }
 
         function startBlackjack() {
+            if (blackjackState.bank < blackjackState.bet) {
+                blackjackState.message = "Bankroll insuffisant";
+                renderBlackjack(false);
+                return;
+            }
+
             blackjackState.player = [drawCard(), drawCard()];
             blackjackState.dealer = [drawCard(), drawCard()];
             blackjackState.over = false;
+            blackjackState.roundStarted = true;
+            blackjackState.bank -= blackjackState.bet;
             blackjackState.message = "A toi de jouer";
             renderBlackjack(true);
         }
@@ -1923,15 +2167,19 @@
                 blackjackState.message = "Perdu: tu depasses 21";
             } else if (dealer > 21) {
                 blackjackState.message = "Gagne: dealer depasse 21";
+                blackjackState.bank += blackjackState.bet * 2;
             } else if (player > dealer) {
                 blackjackState.message = "Gagne";
+                blackjackState.bank += blackjackState.bet * 2;
             } else if (player < dealer) {
                 blackjackState.message = "Perdu";
             } else {
                 blackjackState.message = "Egalite";
+                blackjackState.bank += blackjackState.bet;
             }
 
             blackjackState.over = true;
+            blackjackState.roundStarted = false;
             renderBlackjack(false);
         }
 
@@ -1970,6 +2218,7 @@
             snakeState.nextDir = { x: 1, y: 0 };
             snakeState.food = randomFoodPosition();
             snakeState.score = 0;
+            snakeState.speed = 120;
             snakeScoreEl.textContent = "0";
             snakeBestEl.textContent = String(snakeState.best);
             snakeStatus.textContent = "Pret";
@@ -1999,6 +2248,12 @@
                 snakeState.score += 1;
                 snakeScoreEl.textContent = String(snakeState.score);
                 snakeState.food = randomFoodPosition();
+                snakeState.speed = Math.max(70, 120 - snakeState.score * 3);
+
+                if (snakeState.running) {
+                    clearInterval(snakeState.timer);
+                    snakeState.timer = setInterval(tickSnake, snakeState.speed);
+                }
 
                 if (snakeState.score > snakeState.best) {
                     snakeState.best = snakeState.score;
@@ -2056,10 +2311,11 @@
             pongState.playerY = Math.max(0, Math.min(pongCanvas.height - paddleH, pongState.playerY));
 
             const aiCenter = pongState.aiY + paddleH / 2;
+            const aiSpeed = Math.min(7.2, 4.2 + (pongState.aiScore + pongState.playerScore) * 0.15);
             if (aiCenter < pongState.ballY - 8) {
-                pongState.aiY += 4.2;
+                pongState.aiY += aiSpeed;
             } else if (aiCenter > pongState.ballY + 8) {
-                pongState.aiY -= 4.2;
+                pongState.aiY -= aiSpeed;
             }
             pongState.aiY = Math.max(0, Math.min(pongCanvas.height - paddleH, pongState.aiY));
 
@@ -2072,10 +2328,12 @@
 
             if (pongState.ballX <= 38 && pongState.ballY > pongState.playerY && pongState.ballY < pongState.playerY + paddleH) {
                 pongState.ballVX = Math.abs(pongState.ballVX) + 0.2;
+                pongState.ballVY += (pongState.ballY - (pongState.playerY + paddleH / 2)) * 0.06;
             }
 
             if (pongState.ballX >= pongCanvas.width - 38 && pongState.ballY > pongState.aiY && pongState.ballY < pongState.aiY + paddleH) {
                 pongState.ballVX = -Math.abs(pongState.ballVX) - 0.2;
+                pongState.ballVY += (pongState.ballY - (pongState.aiY + paddleH / 2)) * 0.05;
             }
 
             if (pongState.ballX < 0) {
@@ -2130,10 +2388,24 @@
 
         function updateSalon() {
             salonAvatar.className = "salon-avatar " + salonState.gender + " style-" + salonState.style;
+            if (salonState.beard !== "none") {
+                salonAvatar.classList.add("beard-" + salonState.beard);
+            }
+            if (salonState.glasses) {
+                salonAvatar.classList.add("has-glasses");
+            }
+            if (salonState.earrings) {
+                salonAvatar.classList.add("has-earrings");
+            }
             salonAvatar.style.setProperty("--hair-color", salonState.hairColor);
             salonAvatar.style.setProperty("--outfit-color", salonState.outfitColor);
+            salonAvatar.style.setProperty("--skin-color", salonState.skinColor);
+            salonAvatar.style.setProperty("--eye-color", salonState.eyeColor);
             salonAvatar.style.setProperty("--trim", salonState.cut + "px");
             salonAvatar.style.setProperty("--fade-width", salonState.fade + "px");
+            salonAvatar.style.setProperty("--head-scale", String(salonState.headScale));
+            salonAvatar.style.setProperty("--eye-size", salonState.eyeSize + "px");
+            salonAvatar.style.setProperty("--brow-tilt", salonState.browTilt + "deg");
 
             salonStyleBadge.textContent = styleLabels[salonState.style];
             serviceGender.textContent = salonState.gender === "woman" ? "Femme" : "Homme";
@@ -2150,10 +2422,28 @@
                 button.classList.toggle("active", button.dataset.color === salonState.hairColor);
             });
 
+            skinButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.skin === salonState.skinColor);
+            });
+
+            eyeButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.eye === salonState.eyeColor);
+            });
+
+            toolButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.tool === salonState.tool);
+            });
+
             styleSelect.value = salonState.style;
             cutRange.value = String(salonState.cut);
             fadeRange.value = String(salonState.fade);
             outfitSelect.value = salonState.outfitColor;
+            beardSelect.value = salonState.beard;
+            headRange.value = String(Math.round(salonState.headScale * 100));
+            eyeRange.value = String(salonState.eyeSize);
+            browRange.value = String(salonState.browTilt);
+            glassesToggle.checked = salonState.glasses;
+            earringsToggle.checked = salonState.earrings;
         }
 
         function applySalonPreset(nextState) {
@@ -2260,6 +2550,8 @@
             if (!game.running) {
                 return;
             }
+
+            game.pipeSpeed = 2.6 + Math.min(2.2, game.score * 0.04);
 
             game.velocityY += game.gravity;
             game.birdY += game.velocityY;
@@ -2456,6 +2748,14 @@
         });
 
         bjNew.addEventListener("click", startBlackjack);
+        bjChipButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const add = Number(button.dataset.bjBet || 0);
+                blackjackState.bet = Math.min(blackjackState.bank, Math.max(25, blackjackState.bet + add));
+                renderBlackjack(!blackjackState.over);
+            });
+        });
+
         bjHit.addEventListener("click", () => {
             if (blackjackState.over) {
                 return;
@@ -2487,7 +2787,7 @@
 
             snakeState.running = true;
             snakeStatus.textContent = "En jeu";
-            snakeState.timer = setInterval(tickSnake, 120);
+            snakeState.timer = setInterval(tickSnake, snakeState.speed);
         });
 
         snakeReset.addEventListener("click", () => {
@@ -2524,17 +2824,53 @@
             renderPong();
         });
 
-        function playTttAiMove() {
-            const empties = tttState.board
-                .map((value, index) => (value ? -1 : index))
-                .filter((index) => index >= 0);
+        function minimax(board, isAiTurn) {
+            const winner = winnerOnBoard(board);
+            if (winner === "O") {
+                return { score: 1, move: -1 };
+            }
+            if (winner === "X") {
+                return { score: -1, move: -1 };
+            }
+            if (board.every(Boolean)) {
+                return { score: 0, move: -1 };
+            }
 
-            if (!empties.length || tttState.over) {
+            const symbol = isAiTurn ? "O" : "X";
+            let best = { score: isAiTurn ? -Infinity : Infinity, move: -1 };
+
+            for (let index = 0; index < board.length; index += 1) {
+                if (board[index]) {
+                    continue;
+                }
+
+                board[index] = symbol;
+                const result = minimax(board, !isAiTurn);
+                board[index] = "";
+
+                if (isAiTurn) {
+                    if (result.score > best.score) {
+                        best = { score: result.score, move: index };
+                    }
+                } else if (result.score < best.score) {
+                    best = { score: result.score, move: index };
+                }
+            }
+
+            return best;
+        }
+
+        function playTttAiMove() {
+            if (tttState.over) {
                 return;
             }
 
-            const pick = empties[Math.floor(Math.random() * empties.length)];
-            tttState.board[pick] = "O";
+            const { move } = minimax([...tttState.board], true);
+            if (move < 0) {
+                return;
+            }
+
+            tttState.board[move] = "O";
 
             const winner = winnerOnBoard(tttState.board);
             if (winner) {
@@ -2611,6 +2947,78 @@
             applySalonPreset({ outfitColor: event.target.value });
         });
 
+        beardSelect.addEventListener("change", (event) => {
+            applySalonPreset({ beard: event.target.value });
+        });
+
+        headRange.addEventListener("input", (event) => {
+            applySalonPreset({ headScale: Number(event.target.value) / 100 });
+        });
+
+        eyeRange.addEventListener("input", (event) => {
+            applySalonPreset({ eyeSize: Number(event.target.value) });
+        });
+
+        browRange.addEventListener("input", (event) => {
+            applySalonPreset({ browTilt: Number(event.target.value) });
+        });
+
+        glassesToggle.addEventListener("change", (event) => {
+            applySalonPreset({ glasses: event.target.checked });
+        });
+
+        earringsToggle.addEventListener("change", (event) => {
+            applySalonPreset({ earrings: event.target.checked });
+        });
+
+        skinButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applySalonPreset({ skinColor: button.dataset.skin });
+            });
+        });
+
+        eyeButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applySalonPreset({ eyeColor: button.dataset.eye });
+            });
+        });
+
+        toolButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applySalonPreset({ tool: button.dataset.tool });
+            });
+        });
+
+        salonPreview.addEventListener("click", () => {
+            if (salonState.tool === "scissors") {
+                applySalonPreset({ cut: Math.min(60, salonState.cut + 4) });
+                return;
+            }
+
+            if (salonState.tool === "clipper") {
+                applySalonPreset({
+                    fade: Math.min(28, salonState.fade + 3),
+                    style: salonState.gender === "man" ? "fade" : salonState.style
+                });
+                return;
+            }
+
+            if (salonState.tool === "dye") {
+                const picked = colorButtons[Math.floor(Math.random() * colorButtons.length)].dataset.color;
+                applySalonPreset({ hairColor: picked, hairLabel: colorLabels[picked] || "Coloration" });
+                return;
+            }
+
+            if (salonState.tool === "curl") {
+                applySalonPreset({ style: salonState.style === "curly" ? "long" : "curly" });
+                return;
+            }
+
+            if (salonState.tool === "wash") {
+                applySalonPreset({ hairColor: "#4b2e1f", hairLabel: "Brun profond" });
+            }
+        });
+
         randomStyleButton.addEventListener("click", () => {
             const randomStyle = styleChoices[Math.floor(Math.random() * styleChoices.length)];
             const randomHair = colorButtons[Math.floor(Math.random() * colorButtons.length)].dataset.color;
@@ -2623,7 +3031,15 @@
                 hairLabel: colorLabels[randomHair],
                 outfitColor: randomOutfit,
                 cut: Math.floor(Math.random() * 26) + 4,
-                fade: Math.floor(Math.random() * 25)
+                fade: Math.floor(Math.random() * 25),
+                skinColor: skinButtons[Math.floor(Math.random() * skinButtons.length)].dataset.skin,
+                eyeColor: eyeButtons[Math.floor(Math.random() * eyeButtons.length)].dataset.eye,
+                beard: ["none", "light", "full"][Math.floor(Math.random() * 3)],
+                glasses: Math.random() > 0.5,
+                earrings: Math.random() > 0.5,
+                headScale: 0.88 + Math.random() * 0.32,
+                eyeSize: 8 + Math.floor(Math.random() * 11),
+                browTilt: Math.floor(Math.random() * 41) - 20
             });
         });
 
@@ -2635,7 +3051,16 @@
                 hairLabel: "Brun profond",
                 outfitColor: "#f97316",
                 cut: 8,
-                fade: 12
+                fade: 12,
+                skinColor: "#f1c8a6",
+                eyeColor: "#1f2937",
+                beard: "none",
+                glasses: false,
+                earrings: false,
+                headScale: 1,
+                eyeSize: 12,
+                browTilt: 0,
+                tool: "scissors"
             });
         });
 
