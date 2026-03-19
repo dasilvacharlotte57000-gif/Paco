@@ -1432,6 +1432,29 @@
             min-height: 460px;
         }
 
+        .subway-shell {
+            display: grid;
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .subway-frame-wrap {
+            border: 1px solid var(--panel-border);
+            background: var(--panel);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow);
+            border-radius: 28px;
+            padding: 18px;
+        }
+
+        .subway-frame {
+            width: 100%;
+            height: min(82vh, 920px);
+            border: 0;
+            border-radius: 22px;
+            background: #0f172a;
+        }
+
         #arcade-canvas {
             display: block;
             width: 100%;
@@ -2244,10 +2267,10 @@
                         <p>Duel ultra nerveux</p>
                     </article>
 
-                    <article class="tile t-runner w3 h2" onclick="navigateTo('/arcade')">
+                    <article class="tile t-runner w3 h2" onclick="navigateTo('/subway')">
                         <span class="tile-icon">🏃</span>
-                        <h3>Subway Surfer</h3>
-                        <p>Runner 3 voies jouable</p>
+                        <h3>Subway Surfers</h3>
+                        <p>Version MIT integree</p>
                     </article>
                 </div>
             </section>
@@ -2381,7 +2404,7 @@
                 <div class="brand-badge">🎮</div>
                 <div>
                     <h1>Arcade 5 en 1</h1>
-                    <p>Stack, Battles, Race, Sky et Subway</p>
+                    <p>Stack, Battles, Race, Sky et Runner</p>
                 </div>
             </div>
             <nav class="nav" aria-label="Navigation principale">
@@ -2405,7 +2428,7 @@
                         <button class="action-button arcade-mode" type="button" data-arcade-mode="brawl">🥊 Battles</button>
                         <button class="action-button arcade-mode" type="button" data-arcade-mode="race">🚗 Race</button>
                         <button class="action-button arcade-mode" type="button" data-arcade-mode="sky">✈️ Sky</button>
-                        <button class="action-button arcade-mode" type="button" data-arcade-mode="runner">🚇 Subway</button>
+                        <button class="action-button arcade-mode" type="button" data-arcade-mode="runner">🏃 Runner</button>
                     </div>
 
                     <div class="scoreboard">
@@ -2452,6 +2475,36 @@
                     <h3>Instructions</h3>
                     <ul class="tips" id="arcade-help"></ul>
                 </aside>
+            </section>
+        </main>
+    </div>
+
+    <div class="page hidden" id="subway-page">
+        <header class="topbar">
+            <div class="brand">
+                <div class="brand-badge">🚇</div>
+                <div>
+                    <h1>Subway Surfers</h1>
+                    <p>Version MIT integree depuis RohanChacko/Subway-Surfers</p>
+                </div>
+            </div>
+            <nav class="nav" aria-label="Navigation principale">
+                <button class="back-button" onclick="navigateTo('/')">Retour</button>
+                <a class="back-button" href="subway/game.html" target="_blank" rel="noreferrer">Ouvrir seul</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="subway-shell">
+                <div class="spotlight">
+                    <span class="spotlight-tag">MIT</span>
+                    <h3>Jeu source embarque</h3>
+                    <p class="subtitle">Le jeu original WebGL est charge depuis le dossier local subway/game.html avec ses assets, scripts et licence MIT conserves.</p>
+                </div>
+
+                <div class="subway-frame-wrap">
+                    <iframe class="subway-frame" id="subway-frame" src="subway/game.html" title="Subway Surfers"></iframe>
+                </div>
             </section>
         </main>
     </div>
@@ -2992,6 +3045,16 @@
             const pages = document.querySelectorAll(".page");
             pages.forEach(page => page.classList.add("hidden"));
 
+            if (typeof subwayFrame !== "undefined" && subwayFrame) {
+                if (path === "/subway") {
+                    if (!subwayFrame.getAttribute("src")) {
+                        subwayFrame.setAttribute("src", "subway/game.html");
+                    }
+                } else if (subwayFrame.getAttribute("src")) {
+                    subwayFrame.setAttribute("src", "");
+                }
+            }
+
             if (path === "/") {
                 document.getElementById("home").classList.remove("hidden");
             } else if (path === "/blackjack") {
@@ -3010,6 +3073,8 @@
                 document.getElementById("mini10-page").classList.remove("hidden");
             } else if (path === "/arcade") {
                 document.getElementById("arcade-page").classList.remove("hidden");
+            } else if (path === "/subway") {
+                document.getElementById("subway-page").classList.remove("hidden");
             } else {
                 document.getElementById("home").classList.remove("hidden");
             }
@@ -3154,6 +3219,7 @@
         const arcadeStateLabel = document.getElementById("arcade-state");
         const arcadeHelp = document.getElementById("arcade-help");
         const arcadeModes = Array.from(document.querySelectorAll("[data-arcade-mode]"));
+        const subwayFrame = document.getElementById("subway-frame");
 
         const game = {
             birdX: 180,
@@ -3373,7 +3439,7 @@
                     ]
                 },
                 runner: {
-                    title: "Subway Surfer",
+                    title: "Runner Lite",
                     subtitle: "Runner 3 voies avec pieces et bonus.",
                     tips: [
                         "Fleches gauche/droite pour changer de voie.",
