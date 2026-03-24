@@ -21,7 +21,7 @@
       --accent: #de5137;
       --accent-soft: #ff8e72;
       --shadow: 0 22px 44px rgba(2, 8, 15, 0.52);
-      --maxw: 1200px;
+      --maxw: 1260px;
     }
 
     * {
@@ -38,7 +38,7 @@
       font-family: "Space Grotesk", "Segoe UI", sans-serif;
       color: var(--text);
       min-height: 100vh;
-      line-height: 1.55;
+      line-height: 1.7;
       background:
         radial-gradient(circle at 12% 10%, rgba(222, 81, 55, 0.2), transparent 22%),
         radial-gradient(circle at 88% 14%, rgba(105, 142, 177, 0.2), transparent 25%),
@@ -79,7 +79,7 @@
     }
 
     .container {
-      width: min(var(--maxw), calc(100% - 2rem));
+      width: min(var(--maxw), calc(100% - 3rem));
       margin: 0 auto;
     }
 
@@ -98,7 +98,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 0.8rem 0;
+      padding: 1rem 0;
     }
 
     .brand {
@@ -142,7 +142,7 @@
 
     .nav {
       display: flex;
-      gap: 1rem;
+      gap: 1.35rem;
       font-size: 0.95rem;
     }
 
@@ -170,13 +170,13 @@
     }
 
     .hero {
-      padding: 4.4rem 0 2.6rem;
+      padding: 5.2rem 0 3.4rem;
     }
 
     .hero-layout {
       display: grid;
       grid-template-columns: 1.25fr 0.75fr;
-      gap: 1rem;
+      gap: 1.4rem;
     }
 
     .card {
@@ -188,7 +188,7 @@
     }
 
     .hero-main {
-      padding: 1.7rem;
+      padding: 2rem;
       position: relative;
       overflow: hidden;
       animation: rise 0.6s ease both;
@@ -227,23 +227,23 @@
     }
 
     .hero-main h1 {
-      margin-top: 0.85rem;
+      margin-top: 1rem;
       font-size: clamp(2.3rem, 4.2vw, 3.45rem);
       line-height: 1.02;
       max-width: 16ch;
     }
 
     .hero-main p {
-      margin-top: 0.95rem;
+      margin-top: 1.2rem;
       color: #c4d5e4;
-      max-width: 62ch;
+      max-width: 58ch;
     }
 
     .hero-actions {
-      margin-top: 1.2rem;
+      margin-top: 1.55rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
+      gap: 0.9rem;
     }
 
     .btn {
@@ -276,7 +276,7 @@
     }
 
     .hero-contact {
-      padding: 1.3rem;
+      padding: 1.6rem;
       background:
         linear-gradient(160deg, rgba(17, 31, 44, 0.95), rgba(9, 18, 26, 0.98)),
         repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0 8px, rgba(255, 255, 255, 0.04) 8px 16px);
@@ -284,21 +284,21 @@
     }
 
     .hero-contact h2 {
-      font-size: 1.45rem;
+      font-size: 1.55rem;
     }
 
     .contact-list {
       list-style: none;
-      margin-top: 0.9rem;
+      margin-top: 1.15rem;
       display: grid;
-      gap: 0.62rem;
+      gap: 0.85rem;
     }
 
     .contact-list li {
       border: 1px solid rgba(225, 236, 248, 0.2);
       background: rgba(255, 255, 255, 0.04);
       border-radius: 12px;
-      padding: 0.64rem 0.72rem;
+      padding: 0.86rem 0.92rem;
     }
 
     .contact-list small {
@@ -317,16 +317,16 @@
     }
 
     .stats {
-      margin-top: 0.95rem;
+      margin-top: 1.35rem;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.7rem;
+      gap: 1rem;
     }
 
     .stat-card {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.85rem;
+      padding: 1.1rem;
       background: rgba(12, 23, 33, 0.72);
       text-align: center;
     }
@@ -346,13 +346,13 @@
     }
 
     .sections {
-      padding-bottom: 3.2rem;
+      padding-bottom: 4rem;
       display: grid;
-      gap: 1rem;
+      gap: 1.4rem;
     }
 
     .section-block {
-      padding: 1.4rem;
+      padding: 1.8rem;
       animation: rise 0.7s ease both;
       transition: transform 0.24s ease, border-color 0.24s ease;
     }
@@ -366,27 +366,27 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
       flex-wrap: wrap;
-      margin-bottom: 0.7rem;
+      margin-bottom: 1rem;
     }
 
     .section-head p {
       color: #c0d3e3;
-      max-width: 62ch;
+      max-width: 64ch;
     }
 
     .services-grid {
-      margin-top: 0.85rem;
+      margin-top: 1.1rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.85rem;
+      gap: 1rem;
     }
 
     .service {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.92rem;
+      padding: 1.12rem;
       background: linear-gradient(170deg, rgba(17, 33, 46, 0.96), rgba(11, 21, 30, 0.96));
       position: relative;
       overflow: hidden;
@@ -405,34 +405,35 @@
     .service h4 {
       font-size: 1.05rem;
       color: #f1f7fd;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     .service p {
       color: #bfd1e0;
       font-size: 0.93rem;
+      max-width: 34ch;
     }
 
     .about-grid {
-      margin-top: 0.8rem;
+      margin-top: 1rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     .about-panel {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.95rem;
+      padding: 1.2rem;
       background: rgba(14, 27, 39, 0.82);
       color: #c5d7e6;
     }
 
     .team-grid {
-      margin-top: 0.85rem;
+      margin-top: 1.05rem;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.85rem;
+      gap: 1rem;
     }
 
     .team-photo {
@@ -453,7 +454,7 @@
     }
 
     .team-photo figcaption {
-      padding: 0.66rem 0.8rem;
+      padding: 0.86rem 1rem;
       font-size: 0.9rem;
       color: #c5d7e6;
       border-top: 1px solid var(--line);
@@ -461,16 +462,16 @@
     }
 
     .method-grid {
-      margin-top: 0.85rem;
+      margin-top: 1.05rem;
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.85rem;
+      gap: 1rem;
     }
 
     .method-step {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.95rem;
+      padding: 1.2rem;
       background: rgba(14, 27, 39, 0.84);
     }
 
@@ -489,7 +490,7 @@
 
     .method-step h4 {
       font-size: 1.03rem;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
       color: #f1f7fd;
     }
 
@@ -499,23 +500,23 @@
     }
 
     .contact-grid {
-      margin-top: 0.8rem;
+      margin-top: 1.05rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     .contact-card {
       border: 1px solid var(--line);
       border-radius: 14px;
-      padding: 0.95rem;
+      padding: 1.2rem;
       background: linear-gradient(170deg, rgba(17, 33, 46, 0.96), rgba(11, 21, 30, 0.96));
     }
 
     .contact-card h4 {
       font-size: 1.05rem;
       color: #f1f7fd;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.55rem;
     }
 
     .contact-card p {
@@ -531,7 +532,7 @@
     .site-footer {
       border-top: 1px solid var(--line);
       background: rgba(6, 12, 18, 0.56);
-      padding: 1.2rem 0 2rem;
+      padding: 1.6rem 0 2.4rem;
       color: #b4c6d6;
       font-size: 0.93rem;
     }
@@ -540,7 +541,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 0.7rem;
+      gap: 1rem;
     }
 
     @keyframes rise {
@@ -560,7 +561,7 @@
       }
 
       .hero {
-        padding-top: 2.5rem;
+        padding-top: 3rem;
       }
 
       .hero-layout,
