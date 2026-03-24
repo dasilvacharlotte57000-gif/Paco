@@ -10,16 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sand: #f7f2e7;
-      --sand-strong: #e8deca;
-      --steel: #24323d;
-      --steel-soft: #3f5568;
+      --sand: #0f1820;
+      --sand-strong: #1a2531;
+      --steel: #dce6f0;
+      --steel-soft: #9bb0c3;
       --signal: #d6482f;
       --signal-soft: #ff7f5f;
-      --ink: #11181f;
+      --ink: #e6edf3;
       --white: #ffffff;
       --maxw: 1180px;
-      --shadow: 0 18px 42px rgba(17, 24, 31, 0.18);
+      --shadow: 0 18px 42px rgba(2, 6, 10, 0.45);
     }
 
     * {
@@ -36,9 +36,9 @@
       font-family: "Space Grotesk", "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 5% 10%, rgba(214, 72, 47, 0.14), transparent 24%),
-        radial-gradient(circle at 95% 15%, rgba(63, 85, 104, 0.2), transparent 24%),
-        linear-gradient(180deg, #faf6ed 0%, #f0e7d6 52%, #efe4d1 100%);
+        radial-gradient(circle at 5% 10%, rgba(214, 72, 47, 0.16), transparent 24%),
+        radial-gradient(circle at 95% 15%, rgba(89, 124, 153, 0.2), transparent 24%),
+        linear-gradient(180deg, #08121b 0%, #0c1823 52%, #0f1d29 100%);
       min-height: 100vh;
       line-height: 1.5;
     }
@@ -58,8 +58,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(10px);
-      background: rgba(247, 242, 231, 0.78);
-      border-bottom: 1px solid rgba(36, 50, 61, 0.15);
+      background: rgba(8, 17, 26, 0.82);
+      border-bottom: 1px solid rgba(220, 230, 240, 0.16);
     }
 
     .site-header .container {
@@ -77,16 +77,23 @@
     }
 
     .brand-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      background: linear-gradient(140deg, var(--signal), #b83926);
+      background: linear-gradient(150deg, #0b141d, #162533);
+      border: 1px solid rgba(220, 230, 240, 0.25);
       color: var(--white);
-      font-family: "Barlow Condensed", sans-serif;
-      font-size: 1.4rem;
-      box-shadow: 0 10px 20px rgba(214, 72, 47, 0.36);
+      box-shadow: 0 10px 20px rgba(2, 6, 10, 0.45);
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .brand-text h1 {
@@ -99,7 +106,7 @@
 
     .brand-text p {
       font-size: 0.79rem;
-      color: var(--steel-soft);
+      color: #b8c8d8;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
@@ -113,7 +120,7 @@
 
     .nav a {
       position: relative;
-      color: var(--steel);
+      color: #dbe7f2;
       font-weight: 500;
     }
 
@@ -147,11 +154,11 @@
 
     .hero-main,
     .hero-contact {
-      border: 1px solid rgba(36, 50, 61, 0.12);
+      border: 1px solid rgba(220, 230, 240, 0.14);
       border-radius: 20px;
       padding: 1.45rem;
       box-shadow: var(--shadow);
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.66), rgba(255, 255, 255, 0.42));
+      background: linear-gradient(160deg, rgba(20, 35, 48, 0.9), rgba(12, 24, 34, 0.9));
     }
 
     .eyebrow {
@@ -178,7 +185,7 @@
 
     .hero p {
       margin-top: 1rem;
-      color: #2f3f4b;
+      color: #bfd0de;
       max-width: 66ch;
     }
 
@@ -210,9 +217,9 @@
     }
 
     .btn-secondary {
-      color: var(--steel);
-      background: rgba(36, 50, 61, 0.08);
-      border: 1px solid rgba(36, 50, 61, 0.2);
+      color: #e6edf3;
+      background: rgba(159, 185, 210, 0.12);
+      border: 1px solid rgba(220, 230, 240, 0.24);
     }
 
     .btn:hover {
@@ -268,10 +275,10 @@
     }
 
     .section-card {
-      border: 1px solid rgba(36, 50, 61, 0.13);
+      border: 1px solid rgba(220, 230, 240, 0.14);
       border-radius: 20px;
       box-shadow: var(--shadow);
-      background: rgba(255, 255, 255, 0.62);
+      background: rgba(13, 24, 35, 0.82);
       padding: 1.35rem;
       animation: rise-in 0.7s ease both;
     }
@@ -282,7 +289,7 @@
       text-transform: uppercase;
       font-size: 1.5rem;
       margin-bottom: 0.55rem;
-      color: var(--steel);
+      color: #f1f6fb;
     }
 
     .services-grid {
@@ -294,15 +301,15 @@
 
     .service {
       border-radius: 14px;
-      border: 1px solid rgba(36, 50, 61, 0.14);
-      background: linear-gradient(170deg, rgba(255, 255, 255, 0.95), rgba(232, 222, 202, 0.58));
+      border: 1px solid rgba(220, 230, 240, 0.14);
+      background: linear-gradient(170deg, rgba(18, 33, 46, 0.96), rgba(13, 24, 35, 0.96));
       padding: 0.95rem;
     }
 
     .service h4 {
       font-size: 1.05rem;
       margin-bottom: 0.3rem;
-      color: #1e2d39;
+      color: #f1f6fb;
     }
 
     .about-grid {
@@ -315,8 +322,8 @@
     .about-panel {
       padding: 0.95rem;
       border-radius: 14px;
-      border: 1px solid rgba(36, 50, 61, 0.15);
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(220, 230, 240, 0.14);
+      background: rgba(16, 29, 41, 0.86);
     }
 
     .contact-grid {
@@ -327,16 +334,16 @@
     }
 
     .contact-grid .contact-box {
-      border: 1px solid rgba(36, 50, 61, 0.15);
+      border: 1px solid rgba(220, 230, 240, 0.14);
       border-radius: 14px;
-      background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(232, 222, 202, 0.54));
+      background: linear-gradient(160deg, rgba(18, 33, 46, 0.96), rgba(13, 24, 35, 0.96));
       padding: 0.95rem;
     }
 
     .contact-box h4 {
       font-size: 1.02rem;
       margin-bottom: 0.3rem;
-      color: #1e2d39;
+      color: #f1f6fb;
     }
 
     .quick-form {
@@ -348,11 +355,12 @@
     .quick-form input,
     .quick-form textarea {
       width: 100%;
-      border: 1px solid rgba(36, 50, 61, 0.25);
+      border: 1px solid rgba(220, 230, 240, 0.24);
       border-radius: 10px;
       padding: 0.66rem 0.75rem;
       font: inherit;
-      background: rgba(255, 255, 255, 0.94);
+      color: #e6edf3;
+      background: rgba(7, 15, 23, 0.92);
     }
 
     .quick-form textarea {
@@ -365,10 +373,10 @@
     }
 
     .site-footer {
-      border-top: 1px solid rgba(36, 50, 61, 0.18);
+      border-top: 1px solid rgba(220, 230, 240, 0.18);
       padding: 1rem 0 2rem;
       font-size: 0.92rem;
-      color: #324451;
+      color: #b4c6d6;
     }
 
     .site-footer .container {
@@ -416,7 +424,9 @@
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <div class="brand-mark">MW</div>
+        <div class="brand-mark" aria-hidden="true">
+          <img src="assets/merryweather-logo.webp" alt="Logo Merryweather">
+        </div>
         <div class="brand-text">
           <h1>Merryweather Security</h1>
           <p>Protection strategique 24/7</p>
@@ -468,22 +478,47 @@
 
     <div class="container sections">
       <section class="section-card" id="services">
-        <h3>Nos services</h3>
-        <p>Des dispositifs modulables selon votre niveau de risque, votre secteur et vos horaires d'activite.</p>
+        <h3>Prestation de Service</h3>
+        <p>Nos services sont accessibles pour tous les citoyens, ainsi que les entreprises.</p>
         <div class="services-grid">
           <article class="service">
-            <h4>Surveillance de sites</h4>
-            <p>Rondes, controle des acces, supervision video et rapports d'incident en temps reel.</p>
+            <h4>Protection VIP</h4>
+            <p>Securisation de personnalites importantes ou de clients fortunes pendant leurs evenements et leurs deplacements courants.</p>
           </article>
           <article class="service">
-            <h4>Securite evenementielle</h4>
-            <p>Filtrage des entrees, gestion de foule et coordination avec les organisateurs.</p>
+            <h4>Securisation d'evenements</h4>
+            <p>Gestion complete de la securite lors d'evenements publics (concerts, soirees, etc.).</p>
           </article>
           <article class="service">
-            <h4>Protection rapprochee</h4>
-            <p>Accompagnement discret de dirigeants, personnalites publiques et delegations.</p>
+            <h4>Securite evenementielle privee</h4>
+            <p>Gestion de la securite lors d'evenements speciaux prives (rendez-vous, mariages, soirees privees, etc.).</p>
+          </article>
+          <article class="service">
+            <h4>Protection de proprietes</h4>
+            <p>Surveillance et protection de proprietes.</p>
+          </article>
+          <article class="service">
+            <h4>Protection de site</h4>
+            <p>Surveillance et protection d'entreprises ou de locaux.</p>
+          </article>
+          <article class="service">
+            <h4>Transport de valeurs</h4>
+            <p>Protection et transport securise de biens.</p>
+          </article>
+          <article class="service">
+            <h4>Conseil en securite</h4>
+            <p>Analyse des vulnerabilites et recommandations sur les meilleures pratiques de securite.</p>
+          </article>
+          <article class="service">
+            <h4>Intervention rapide</h4>
+            <p>Reponse immediate a des situations d'urgence ou a des menaces specifiques.</p>
+          </article>
+          <article class="service">
+            <h4>Gestion des conflits</h4>
+            <p>Resolution des troubles ou des conflits dans des lieux publics ou prives.</p>
           </article>
         </div>
+        <p style="margin-top: 1rem; font-weight: 700; color: #1e2d39;">Merryweather &amp; Co.</p>
       </section>
 
       <section class="section-card" id="apropos">
