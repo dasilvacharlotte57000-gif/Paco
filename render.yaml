@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: paco-arcade
+    name: merryweather
     runtime: static
     buildCommand: ""
     staticPublishPath: .

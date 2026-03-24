@@ -1,4 +1,4 @@
-# Paco Arcade
+# Merryweather
 
 Site deployable sur Render en deux modes.
 
@@ -33,8 +33,8 @@ Site deployable sur Render en deux modes.
 
 Pour tester avec Docker :
 
-`docker build -t paco-arcade .`
+`docker build -t merryweather .`
 
-`docker run -p 10000:10000 paco-arcade`
+`docker run -p 10000:10000 merryweather`
 
 Puis ouvre `http://localhost:10000`.
